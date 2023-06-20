@@ -1,8 +1,8 @@
-<p align="center"><img src="https://www.insan-unggul.ac.id/photos/c3f09a60-a827-4e42-8776-97ce6aebe06c/Logo%20SIU.png" width="100"></p>
+<p align="center"><a href="https://insan-unggul.ac.id/"><img src="https://www.insan-unggul.ac.id/photos/c3f09a60-a827-4e42-8776-97ce6aebe06c/Logo%20SIU.png" width="100"><a></p>
 
 <p align="center">
-<a href="https://laravel.com/"><img src="https://cdn.worldvectorlogo.com/logos/whatsapp.svg" alt="Laravel" width="30"></a>
-<a href="https://laravel.com/"><img src="https://cdn.worldvectorlogo.com/logos/laravel-wordmark-1.svg" alt="Laravel" width="30"></a>
+<a href="https://laravel.com/"><img src="https://cdn.worldvectorlogo.com/logos/whatsapp-2.svg" alt="Laravel" width="50"></a>
+<a href="https://laravel.com/"><img src="https://cdn.worldvectorlogo.com/logos/laravel-wordmark-1.svg" alt="Laravel" width="50"></a>
 <a href="https://opensource.org/licenses/MIT"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
 </p>
 
