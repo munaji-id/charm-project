@@ -1,4 +1,4 @@
-<p align="center"><img src="https://www.insan-unggul.ac.id/photos/c3f09a60-a827-4e42-8776-97ce6aebe06c/Logo%20SIU.png" width="400"></p>
+<p align="center"><img src="https://www.insan-unggul.ac.id/photos/c3f09a60-a827-4e42-8776-97ce6aebe06c/Logo%20SIU.png" width="200"></p>
 
 <p align="center">
 <a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
@@ -9,7 +9,7 @@
 
 ## Tentang Proyek
 
-Proyek ini adalah proyek penelitian Tugas Akhir Munaji 2019.11.054 STTIKOM INSAN UNGGUL CILEGON, Sistem Informasi Manajemen Permintaan Perubahan Aplikasi SAP pada PT Krakatau Information Technology.
+Proyek ini adalah proyek penelitian Tugas Akhir Munaji 2019.11.054 STTIKOM INSAN UNGGUL CILEGON yang berjudul Sistem Informasi Manajemen Permintaan Perubahan Aplikasi SAP pada PT Krakatau Information Technology.
 
 - [Simple, fast routing engine](https://laravel.com/docs/routing).
 - [Powerful dependency injection container](https://laravel.com/docs/container).
