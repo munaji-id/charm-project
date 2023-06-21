@@ -16,7 +16,7 @@
       <i class="btn-icon-prepend" data-feather="printer"></i>
       Print
     </button> -->
-    <a href="{{ route('companies.create') }}" class="btn btn-primary btn-icon-text mb-2 mb-md-0">
+    <a href="{{ route('company.create') }}" class="btn btn-primary btn-icon-text mb-2 mb-md-0">
       <i class="btn-icon-prepend" data-feather="user-plus"></i>
       Tambah
     </a>
@@ -50,8 +50,13 @@
                 <td>{{$company->created_at}}</td>
                 <td>{{$company->updated_at}}</td>
                 <td align = "center">
-                  <a><i class="icon-lg text-muted pb-3px outline-primary" data-feather="edit"></i></a>
-                  <a><i class="icon-lg text-muted pb-3px" data-feather="trash-2"></i></a>
+                  <form action="{{ route('company.destroy', $company->id) }}" method="post">
+                    <a href="{{ route('company.edit', $company->id) }}"><i class="icon-lg text-muted pb-3px outline-primary" data-feather="edit"></i></a>
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" class="btn btn-danger">Delete</button>
+                  {{-- <a><i class="icon-lg text-muted pb-3px" data-feather="trash-2"></i></a> --}}
+                </form>
                 </td>
               </tr>
               @endforeach

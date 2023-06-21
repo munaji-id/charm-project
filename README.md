@@ -6,6 +6,8 @@
 <a href="https://opensource.org/licenses/MIT"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
 </p>
 
+## Tentang Proyek
+
 Proyek ini adalah proyek penelitian Tugas Akhir Munaji 2019.11.054 STTIKOM INSAN UNGGUL CILEGON yang berjudul Sistem Informasi Manajemen Permintaan Perubahan Aplikasi SAP pada PT Krakatau Information Technology berbasis website yang di bangun menggunakan framework laravel.
 
 - [Simple, fast routing engine](https://laravel.com/docs/routing).
@@ -17,6 +19,10 @@ Proyek ini adalah proyek penelitian Tugas Akhir Munaji 2019.11.054 STTIKOM INSAN
 - [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
 
 Laravel is accessible, powerful, and provides tools required for large, robust applications.
+
+## Tentang Proyek
+- [PHP >= 8.0].
+- [Laravel > 9].
 
 ## Learning Laravel
 

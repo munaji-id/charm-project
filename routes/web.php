@@ -34,8 +34,8 @@ Route::get('logout', [AuthController::class, 'logout'])->name('logout');
 // });
 
 Route::group(['middleware'=>'pagerole'], function(){
-    Route::resource('users', UserController::class)->middleware('pagerole');
-    Route::resource('companies', CompanyController::class)->middleware('pagerole');
+    Route::resource('user', UserController::class)->middleware('pagerole');
+    Route::resource('company', CompanyController::class)->middleware('pagerole');
  });
     // Route::get('users', [UserController::class, 'index'])->name('users');
     // Route::get('users/create', [UserController::class, 'create'])->name('create');

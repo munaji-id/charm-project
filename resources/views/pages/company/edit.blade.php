@@ -30,18 +30,19 @@
 
         {{-- <h6 class="card-title">Horizontal Form</h6> --}}
 
-        <form class="forms-sample" method="post" action="{{ route('company.store') }}" >
+        <form class="forms-sample" method="post" action="{{ route('company.update',$company->id) }}">
           @csrf
+          @method('PUT')
           <div class="row mb-3">
             <label for="exampleInputUsername2" class="col-sm-3 col-form-label">Nama Perusahaan</label>
             <div class="col-sm-4">
-              <input type="text" name="nama_perusahaan" class="form-control" placeholder="">
+              <input type="text" name="nama_perusahaan" class="form-control" placeholder="Test" value="{{ $company->nama_perusahaan }}">
             </div>
           </div>
           <div class="row mb-3">
             <label for="exampleInputEmail2" class="col-sm-3 col-form-label">Alamat</label>
             <div class="col-sm-6">
-              <textarea name="alamat"class="form-control" id="exampleFormControlTextarea1" rows="5"></textarea>
+              <textarea name="alamat"class="form-control" id="exampleFormControlTextarea1" rows="5">{{ $company->alamat }}</textarea>
             </div>
           </div>
           <button type="submit" class="btn btn-primary me-2">Simpan</button>

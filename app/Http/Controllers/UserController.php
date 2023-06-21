@@ -17,7 +17,7 @@ class UserController extends Controller
     public function index() {
         $data['title']  = 'Master Data Pengguna';
         $users          = User::all();
-        return view('pages.master-data.index', compact('users'), $data);;
+        return view('pages.master-data.index', compact('users'), $data);
     }
 
     public function create(Request $request)

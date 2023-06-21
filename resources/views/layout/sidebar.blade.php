@@ -246,15 +246,15 @@
           </ul>
         </div>
       </li> -->
-      <li class="nav-item {{ active_class(['companies']) }} or {{ active_class(['companies/create']) }} ">
-        <a href="{{ url('companies') }}" class="nav-link">
+      <li class="nav-item {{ active_class(['company']) }} or {{ active_class(['company/create']) }} ">
+        <a href="{{ url('company') }}" class="nav-link">
           <i class="link-icon" data-feather="briefcase"></i>
           <span class="link-title">Perusahaan</span>
         </a>
       </li>
 
-      <li class="nav-item {{ active_class(['users']) }} "> 
-        <a href="{{ url('users') }}" class="nav-link">
+      <li class="nav-item {{ active_class(['user']) }} "> 
+        <a href="{{ url('user') }}" class="nav-link">
           <i class="link-icon" data-feather="users"></i>
           <span class="link-title">Pengguna</span>
         </a>

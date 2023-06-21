@@ -16,7 +16,7 @@
       <i class="btn-icon-prepend" data-feather="printer"></i>
       Print
     </button> -->
-    <a href="{{ route('users.create') }}" class="btn btn-primary btn-icon-text mb-2 mb-md-0">
+    <a href="{{ route('user.create') }}" class="btn btn-primary btn-icon-text mb-2 mb-md-0">
       <i class="btn-icon-prepend" data-feather="user-plus"></i>
       Tambah
     </a>
