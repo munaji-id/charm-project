@@ -14,6 +14,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CompanyController;
+use App\Http\Controllers\ModulController;
+use App\Http\Controllers\StatusController;
 use App\Http\Controllers\UserController;
 
 Route::get('/', [AuthController::class, 'index'])->name('login');
@@ -36,6 +38,8 @@ Route::get('logout', [AuthController::class, 'logout'])->name('logout');
 Route::group(['middleware'=>'pagerole'], function(){
     Route::resource('user', UserController::class)->middleware('pagerole');
     Route::resource('company', CompanyController::class)->middleware('pagerole');
+    Route::resource('modul', ModulController::class)->middleware('pagerole');
+    Route::resource('status', StatusController::class)->middleware('pagerole');
  });
     // Route::get('users', [UserController::class, 'index'])->name('users');
     // Route::get('users/create', [UserController::class, 'create'])->name('create');

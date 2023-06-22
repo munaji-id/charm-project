@@ -253,6 +253,20 @@
         </a>
       </li>
 
+      <li class="nav-item {{ active_class(['modul']) }} or {{ active_class(['modul/create']) }} ">
+        <a href="{{ url('modul') }}" class="nav-link">
+          <i class="link-icon" data-feather="layers"></i>
+          <span class="link-title">Modul</span>
+        </a>
+      </li>
+
+      <li class="nav-item {{ active_class(['status']) }} or {{ active_class(['status/create']) }} ">
+        <a href="{{ url('status') }}" class="nav-link">
+          <i class="link-icon" data-feather="chevrons-right"></i>
+          <span class="link-title">Status</span>
+        </a>
+      </li>
+
       <li class="nav-item {{ active_class(['user']) }} "> 
         <a href="{{ url('user') }}" class="nav-link">
           <i class="link-icon" data-feather="users"></i>
@@ -272,12 +286,7 @@
           <span class="link-title">Tipe Pengguna</span>
         </a>
       </li>
-      <li class="nav-item {{ active_class(['apps/calendar']) }}">
-        <a href="{{ url('/apps/calendar') }}" class="nav-link">
-          <i class="link-icon" data-feather="layers"></i>
-          <span class="link-title">Modul</span>
-        </a>
-      </li>
+      
       <li class="nav-item {{ active_class(['apps/calendar']) }}">
         <a href="{{ url('/apps/calendar') }}" class="nav-link">
           <i class="link-icon" data-feather="paperclip"></i>
