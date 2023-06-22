@@ -40,6 +40,8 @@
                 <th>Function</th>
                 <th>Email</th>
                 <th>Contact</th>
+                <th>Last Seen</th>
+                <th>Status</th>
                 <th>Actions</th>
               </tr>
             </thead>
@@ -53,6 +55,14 @@
                 <td>{{$user->tipeuser->nama_tipe_user}}</td>
                 <td>{{$user->email}}</td>
                 <td>{{$user->kontak}}</td>
+                <td>{{ Carbon\Carbon::parse($user->last_seen)->diffForHumans() }}</td>
+                <td>
+                  @if(Cache::has('user-is-online-' . $user->id))
+                    <span class="text-success">Online</span>
+                  @else
+                    <span class="text-secondary">Offline</span>
+                  @endif
+                </td>
                 <td align = "center">
                   <a><i class="icon-lg text-muted pb-3px outline-primary" data-feather="edit"></i></a>
                   <a><i class="icon-lg text-muted pb-3px" data-feather="trash-2"></i></a>
