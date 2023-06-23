@@ -32,267 +32,51 @@
           <span class="link-title">Pencarian CR</span>
         </a>
       </li>
-      
-      <!-- <li class="nav-item {{ active_class(['ui-components/*']) }}">
-        <a class="nav-link" data-bs-toggle="collapse" href="#uiComponents" role="button" aria-expanded="{{ is_active_route(['ui-components/*']) }}" aria-controls="uiComponents">
-          <i class="link-icon" data-feather="feather"></i>
-          <span class="link-title">UI Kit</span>
-          <i class="link-arrow" data-feather="chevron-down"></i>
-        </a>
-        <div class="collapse {{ show_class(['ui-components/*']) }}" id="uiComponents">
-          <ul class="nav sub-menu">
-            <li class="nav-item">
-              <a href="{{ url('/ui-components/accordion') }}" class="nav-link {{ active_class(['ui-components/accordion']) }}">Accordion</a>
-            </li>
-            <li class="nav-item">
-              <a href="{{ url('/ui-components/alerts') }}" class="nav-link {{ active_class(['ui-components/alerts']) }}">Alerts</a>
-            </li>
-            <li class="nav-item">
-              <a href="{{ url('/ui-components/badges') }}" class="nav-link {{ active_class(['ui-components/badges']) }}">Badges</a>
-            </li>
-            <li class="nav-item">
-              <a href="{{ url('/ui-components/breadcrumbs') }}" class="nav-link {{ active_class(['ui-components/breadcrumbs']) }}">Breadcrumbs</a>
-            </li>
-            <li class="nav-item">
-              <a href="{{ url('/ui-components/buttons') }}" class="nav-link {{ active_class(['ui-components/buttons']) }}">Buttons</a>
-            </li>
-            <li class="nav-item">
-              <a href="{{ url('/ui-components/button-group') }}" class="nav-link {{ active_class(['ui-components/button-group']) }}">Button group</a>
-            </li>
-            <li class="nav-item">
-              <a href="{{ url('/ui-components/cards') }}" class="nav-link {{ active_class(['ui-components/cards']) }}">Cards</a>
-            </li>
-            <li class="nav-item">
-              <a href="{{ url('/ui-components/carousel') }}" class="nav-link {{ active_class(['ui-components/carousel']) }}">Carousel</a>
-            </li>
-            <li class="nav-item">
-              <a href="{{ url('/ui-components/collapse') }}" class="nav-link {{ active_class(['ui-components/collapse']) }}">Collapse</a>
-            </li>
-            <li class="nav-item">
-              <a href="{{ url('/ui-components/dropdowns') }}" class="nav-link {{ active_class(['ui-components/dropdowns']) }}">Dropdowns</a>
-            </li>
-            <li class="nav-item">
-              <a href="{{ url('/ui-components/list-group') }}" class="nav-link {{ active_class(['ui-components/list-group']) }}">List group</a>
-            </li>
-            <li class="nav-item">
-              <a href="{{ url('/ui-components/media-object') }}" class="nav-link {{ active_class(['ui-components/media-object']) }}">Media object</a>
-            </li>
-            <li class="nav-item">
-              <a href="{{ url('/ui-components/modal') }}" class="nav-link {{ active_class(['ui-components/modal']) }}">Modal</a>
-            </li>
-            <li class="nav-item">
-              <a href="{{ url('/ui-components/navs') }}" class="nav-link {{ active_class(['ui-components/navs']) }}">Navs</a>
-            </li>
-            <li class="nav-item">
-              <a href="{{ url('/ui-components/navbar') }}" class="nav-link {{ active_class(['ui-components/navbar']) }}">Navbar</a>
-            </li>
-            <li class="nav-item">
-              <a href="{{ url('/ui-components/pagination') }}" class="nav-link {{ active_class(['ui-components/pagination']) }}">Pagination</a>
-            </li>
-            <li class="nav-item">
-              <a href="{{ url('/ui-components/popovers') }}" class="nav-link {{ active_class(['ui-components/popovers']) }}">Popvers</a>
-            </li>
-            <li class="nav-item">
-              <a href="{{ url('/ui-components/progress') }}" class="nav-link {{ active_class(['ui-components/progress']) }}">Progress</a>
-            </li>
-            <li class="nav-item">
-              <a href="{{ url('/ui-components/scrollbar') }}" class="nav-link {{ active_class(['ui-components/scrollbar']) }}">Scrollbar</a>
-            </li>
-            <li class="nav-item">
-              <a href="{{ url('/ui-components/scrollspy') }}" class="nav-link {{ active_class(['ui-components/scrollspy']) }}">Scrollspy</a>
-            </li>
-            <li class="nav-item">
-              <a href="{{ url('/ui-components/spinners') }}" class="nav-link {{ active_class(['ui-components/spinners']) }}">Spinners</a>
-            </li>
-            <li class="nav-item">
-              <a href="{{ url('/ui-components/tabs') }}" class="nav-link {{ active_class(['ui-components/tabs']) }}">Tabs</a>
-            </li>
-            <li class="nav-item">
-              <a href="{{ url('/ui-components/tooltips') }}" class="nav-link {{ active_class(['ui-components/tooltips']) }}">Tooltips</a>
-            </li>
-          </ul>
-        </div>
-      </li>
-      <li class="nav-item {{ active_class(['advanced-ui/*']) }}">
-        <a class="nav-link" data-bs-toggle="collapse" href="#advanced-ui" role="button" aria-expanded="{{ is_active_route(['advanced-ui/*']) }}" aria-controls="advanced-ui">
-          <i class="link-icon" data-feather="anchor"></i>
-          <span class="link-title">Advanced UI</span>
-          <i class="link-arrow" data-feather="chevron-down"></i>
-        </a>
-        <div class="collapse {{ show_class(['advanced-ui/*']) }}" id="advanced-ui">
-          <ul class="nav sub-menu">
-            <li class="nav-item">
-              <a href="{{ url('/advanced-ui/cropper') }}" class="nav-link {{ active_class(['advanced-ui/cropper']) }}">Cropper</a>
-            </li>
-            <li class="nav-item">
-              <a href="{{ url('/advanced-ui/owl-carousel') }}" class="nav-link {{ active_class(['advanced-ui/owl-carousel']) }}">Owl Carousel</a>
-            </li>
-            <li class="nav-item">
-              <a href="{{ url('/advanced-ui/sortablejs') }}" class="nav-link {{ active_class(['advanced-ui/sortablejs']) }}">SortableJs</a>
-            </li>
-            <li class="nav-item">
-              <a href="{{ url('/advanced-ui/sweet-alert') }}" class="nav-link {{ active_class(['advanced-ui/sweet-alert']) }}">Sweet Alert</a>
-            </li>
-          </ul>
-        </div>
-      </li>
-      <li class="nav-item {{ active_class(['forms/*']) }}">
-        <a class="nav-link" data-bs-toggle="collapse" href="#forms" role="button" aria-expanded="{{ is_active_route(['forms/*']) }}" aria-controls="forms">
-          <i class="link-icon" data-feather="inbox"></i>
-          <span class="link-title">Forms</span>
-          <i class="link-arrow" data-feather="chevron-down"></i>
-        </a>
-        <div class="collapse {{ show_class(['forms/*']) }}" id="forms">
-          <ul class="nav sub-menu">
-            <li class="nav-item">
-              <a href="{{ url('/forms/basic-elements') }}" class="nav-link {{ active_class(['forms/basic-elements']) }}">Basic Elements</a>
-            </li>
-            <li class="nav-item">
-              <a href="{{ url('/forms/advanced-elements') }}" class="nav-link {{ active_class(['forms/advanced-elements']) }}">Advanced Elements</a>
-            </li>
-            <li class="nav-item">
-              <a href="{{ url('/forms/editors') }}" class="nav-link {{ active_class(['forms/editors']) }}">Editors</a>
-            </li>
-            <li class="nav-item">
-              <a href="{{ url('/forms/wizard') }}" class="nav-link {{ active_class(['forms/wizard']) }}">Wizard</a>
-            </li>
-          </ul>
-        </div>
-      </li>
-      <li class="nav-item {{ active_class(['charts/*']) }}">
-        <a class="nav-link" data-bs-toggle="collapse" href="#charts" role="button" aria-expanded="{{ is_active_route(['charts/*']) }}" aria-controls="charts">
-          <i class="link-icon" data-feather="pie-chart"></i>
-          <span class="link-title">Charts</span>
-          <i class="link-arrow" data-feather="chevron-down"></i>
-        </a>
-        <div class="collapse {{ show_class(['charts/*']) }}" id="charts">
-          <ul class="nav sub-menu">
-            <li class="nav-item">
-              <a href="{{ url('/charts/apex') }}" class="nav-link {{ active_class(['charts/apex']) }}">Apex</a>
-            </li>
-            <li class="nav-item">
-              <a href="{{ url('/charts/chartjs') }}" class="nav-link {{ active_class(['charts/chartjs']) }}">ChartJs</a>
-            </li>
-            <li class="nav-item">
-              <a href="{{ url('/charts/flot') }}" class="nav-link {{ active_class(['charts/flot']) }}">Flot</a>
-            </li>
-            <li class="nav-item">
-              <a href="{{ url('/charts/morrisjs') }}" class="nav-link {{ active_class(['charts/morrisjs']) }}">MorrisJs</a>
-            </li>
-            <li class="nav-item">
-              <a href="{{ url('/charts/peity') }}" class="nav-link {{ active_class(['charts/peity']) }}">Peity</a>
-            </li>
-            <li class="nav-item">
-              <a href="{{ url('/charts/sparkline') }}" class="nav-link {{ active_class(['charts/sparkline']) }}">Sparkline</a>
-            </li>
-          </ul>
-        </div>
-      </li>
-      <li class="nav-item {{ active_class(['tables/*']) }}">
-        <a class="nav-link" data-bs-toggle="collapse" href="#tables" role="button" aria-expanded="{{ is_active_route(['tables/*']) }}" aria-controls="tables">
-          <i class="link-icon" data-feather="layout"></i>
-          <span class="link-title">Tables</span>
-          <i class="link-arrow" data-feather="chevron-down"></i>
-        </a>
-        <div class="collapse {{ show_class(['tables/*']) }}" id="tables">
-          <ul class="nav sub-menu">
-            <li class="nav-item">
-              <a href="{{ url('/tables/basic-tables') }}" class="nav-link {{ active_class(['tables/basic-tables']) }}">Basic Tables</a>
-            </li>
-            <li class="nav-item">
-              <a href="{{ url('/tables/data-table') }}" class="nav-link {{ active_class(['tables/data-table']) }}">Data Table</a>
-            </li>
-          </ul>
-        </div>
-      </li>
-      <li class="nav-item {{ active_class(['icons/*']) }}">
-        <a class="nav-link" data-bs-toggle="collapse" href="#icons" role="button" aria-expanded="{{ is_active_route(['icons/*']) }}" aria-controls="icons">
-          <i class="link-icon" data-feather="smile"></i>
-          <span class="link-title">Icons</span>
-          <i class="link-arrow" data-feather="chevron-down"></i>
-        </a>
-        <div class="collapse {{ show_class(['icons/*']) }}" id="icons">
-          <ul class="nav sub-menu">
-            <li class="nav-item">
-              <a href="{{ url('/icons/feather-icons') }}" class="nav-link {{ active_class(['icons/feather-icons']) }}">Feather Icons</a>
-            </li>
-            <li class="nav-item">
-              <a href="{{ url('/icons/flag-icons') }}" class="nav-link {{ active_class(['icons/flag-icons']) }}">Flag Icons</a>
-            </li>
-            <li class="nav-item">
-              <a href="{{ url('/icons/mdi-icons') }}" class="nav-link {{ active_class(['icons/mdi-icons']) }}">Mdi Icons</a>
-            </li>
-          </ul>
-        </div>
-      </li> -->
+
       <li class="nav-item nav-category">master data</li>
-      <!-- <li class="nav-item {{ active_class(['email/*']) }}">
-        <a class="nav-link" data-bs-toggle="collapse" href="#email" role="button" aria-expanded="{{ is_active_route(['email/*']) }}" aria-controls="email">
-          <i class="link-icon" data-feather="mail"></i>
-          <span class="link-title">Email</span>
-          <i class="link-arrow" data-feather="chevron-down"></i>
-        </a>
-        <div class="collapse {{ show_class(['email/*']) }}" id="email">
-          <ul class="nav sub-menu">
-            <li class="nav-item">
-              <a href="{{ url('/email/inbox') }}" class="nav-link {{ active_class(['email/inbox']) }}">Inbox</a>
-            </li>
-            <li class="nav-item">
-              <a href="{{ url('/email/read') }}" class="nav-link {{ active_class(['email/read']) }}">Read</a>
-            </li>
-            <li class="nav-item">
-              <a href="{{ url('/email/compose') }}" class="nav-link {{ active_class(['email/compose']) }}">Compose</a>
-            </li>
-          </ul>
-        </div>
-      </li> -->
       <li class="nav-item {{ active_class(['company']) }} or {{ active_class(['company/create']) }} ">
         <a href="{{ url('company') }}" class="nav-link">
           <i class="link-icon" data-feather="briefcase"></i>
           <span class="link-title">Perusahaan</span>
         </a>
       </li>
-
       <li class="nav-item {{ active_class(['modul']) }} or {{ active_class(['modul/create']) }} ">
         <a href="{{ url('modul') }}" class="nav-link">
           <i class="link-icon" data-feather="layers"></i>
           <span class="link-title">Modul</span>
         </a>
       </li>
-
+      <li class="nav-item {{ active_class(['project']) }} or {{ active_class(['project/create']) }}">
+        <a href="{{ url('project') }}" class="nav-link">
+          <i class="link-icon" data-feather="trello"></i>
+          <span class="link-title">Proyek</span>
+        </a>
+      </li>
       <li class="nav-item {{ active_class(['status']) }} or {{ active_class(['status/create']) }} ">
         <a href="{{ url('status') }}" class="nav-link">
           <i class="link-icon" data-feather="chevrons-right"></i>
           <span class="link-title">Status</span>
         </a>
       </li>
-
+      <li class="nav-item {{ active_class(['user']) }}">
+        <a href="{{ url('user') }}" class="nav-link">
+          <i class="link-icon" data-feather="user-check"></i>
+          <span class="link-title">Tipe Pengguna</span>
+        </a>
+      </li>
       <li class="nav-item {{ active_class(['user']) }} "> 
         <a href="{{ url('user') }}" class="nav-link">
           <i class="link-icon" data-feather="users"></i>
           <span class="link-title">Pengguna</span>
         </a>
       </li>
-      
-      <li class="nav-item {{ active_class(['apps/calendar']) }}">
-        <a href="{{ url('/apps/calendar') }}" class="nav-link">
-          <i class="link-icon" data-feather="trello"></i>
-          <span class="link-title">Proyek</span>
-        </a>
-      </li>
-      <li class="nav-item {{ active_class(['apps/calendar']) }}">
-        <a href="{{ url('/apps/calendar') }}" class="nav-link">
-          <i class="link-icon" data-feather="user-check"></i>
-          <span class="link-title">Tipe Pengguna</span>
-        </a>
-      </li>
-      
       <li class="nav-item {{ active_class(['apps/calendar']) }}">
         <a href="{{ url('/apps/calendar') }}" class="nav-link">
           <i class="link-icon" data-feather="paperclip"></i>
           <span class="link-title">Jenis Lampiran</span>
         </a>
       </li>
+
       <li class="nav-item nav-category">repositori</li>
       <li class="nav-item {{ active_class(['general/*']) }}">
         <a class="nav-link" data-bs-toggle="collapse" href="#general" role="button" aria-expanded="{{ is_active_route(['general/*']) }}" aria-controls="general">

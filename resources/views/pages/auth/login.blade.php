@@ -14,7 +14,7 @@
           </div>
           <div class="col-md-8 ps-md-0">
             <div class="auth-form-wrapper px-4 py-5">
-              <a href="#" class="noble-ui-logo d-block mb-2">Change<span>Request</span></a>
+              <a href="#" class="noble-ui-logo d-block mb-2"><img src="{{ asset('/favicon.ico') }}" height="27" width="27"> Change<span>Request</span></a>
               <br>
               <!-- <h5 class="text-muted fw-normal mb-4">Change Request Management</h5> -->
               @if($errors->any())

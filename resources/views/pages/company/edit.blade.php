@@ -1,7 +1,6 @@
 @extends('layout.master')
 
 @push('plugin-styles')
-  <link href="{{ asset('assets/plugins/datatables-net-bs5/dataTables.bootstrap5.css') }}" rel="stylesheet" />
 @endpush
 
 @section('content')
@@ -9,17 +8,6 @@
 <div class="d-flex justify-content-between align-items-center flex-wrap grid-margin">
   <div>
     <h4 class="mb-3 mb-md-0">@yield('title', $title)</h4>
-  </div>
-  <div class="d-flex align-items-center flex-wrap text-nowrap">
-    
-    <!-- <button type="button" class="btn btn-outline-primary btn-icon-text me-2 mb-2 mb-md-0">
-      <i class="btn-icon-prepend" data-feather="printer"></i>
-      Print
-    </button> -->
-    <button type="button" class="btn btn-primary btn-icon-text mb-2 mb-md-0">
-      <i class="btn-icon-prepend" data-feather="user-plus"></i>
-      Tambah
-    </button>
   </div>
 </div>
 
@@ -55,10 +43,7 @@
 @endsection
 
 @push('plugin-scripts')
-  <script src="{{ asset('assets/plugins/datatables-net/jquery.dataTables.js') }}"></script>
-  <script src="{{ asset('assets/plugins/datatables-net-bs5/dataTables.bootstrap5.js') }}"></script>
 @endpush
 
 @push('custom-scripts')
-  <script src="{{ asset('assets/js/data-table.js') }}"></script>
 @endpush

@@ -16,8 +16,8 @@
       <i class="btn-icon-prepend" data-feather="printer"></i>
       Print
     </button> -->
-    <a href="{{ route('company.create') }}" class="btn btn-primary btn-icon-text mb-2 mb-md-0">
-      <i class="btn-icon-prepend" data-feather="briefcase"></i>
+    <a href="{{ route('project.create') }}" class="btn btn-primary btn-icon-text mb-2 mb-md-0">
+      <i class="btn-icon-prepend" data-feather="user-plus"></i>
       Tambah
     </a>
   </div>
@@ -34,26 +34,30 @@
             <thead>
               <tr>
                 <th>ID</th>
-                <th>Nama Perusahaan</th>
-                <th>Alamat</th>
+                <th>Perusahaan</th>
+                <th>Nama Proyek</th>
+                <th>Modul</th>
+                <th>Mulai</th>
+                <th>Selesai</th>
                 <th>Created at</th>
                 <th>Updated at</th>
                 <th>Actions</th>
               </tr>
             </thead>
             <tbody>
-              @foreach($companies as $company)
+              @foreach($projects as $project)
               <tr>
-                <td>{{$company->id}}</td>
-                <td>{{$company->nama_perusahaan}}</td>
-                <td>{{$company->alamat}}</td>
-                <td>{{$company->created_at}}</td>
-                <td>{{$company->updated_at}}</td>
+                <td>{{$project->id}}</td>
+                <td>{{$project->company->nama_perusahaan}}</td>
+                <td>{{$project->nama_proyek}}</td>
+                <td>{{$project->modul->nama_modul}}</td>
+                <td>{{$project->mulai}}</td>
+                <td>{{$project->selesai}}</td>
+                <td>{{$project->created_at}}</td>
+                <td>{{$project->updated_at}}</td>
                 <td align = "center">
-                  @php $companyID= Crypt::encrypt($company->id); @endphp
-                  <form action="{{ route('company.destroy', $companyID) }}" method="post">
-                    <a href="{{ route('company.edit', $companyID) }}"><i class="icon-lg text-muted pb-3px outline-primary" data-feather="edit"></i></a>
-                    @php $prodID= Crypt::encrypt($company->id); @endphp
+                  <form action="{{ route('project.destroy', $project->id) }}" method="post">
+                    <a href="{{ route('project.edit', $project->id) }}"><i class="icon-lg text-muted pb-3px outline-primary" data-feather="edit"></i></a>
                     @csrf
                     @method('DELETE')
                     <button type="submit" class="btn btn-danger">Delete</button>

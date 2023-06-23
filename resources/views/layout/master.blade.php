@@ -36,7 +36,7 @@
 
   @stack('style')
 </head>
-<div class="w-25 fixed-bottom">
+<div class="w-25 fixed-bottom" style="padding-left: 20px;">
            
   @include('flash-messages')
 </div>
@@ -72,14 +72,14 @@
     @stack('custom-scripts')
     <script src="{{ asset('assets/plugins/prismjs/prism.js') }}"></script>
     <script src="{{ asset('assets/plugins/clipboard/clipboard.min.js') }}"></script>
-    {{-- <script>
+    <script>
       $(document).ready(function() {
           window.setTimeout(function() {
-              $(".alert").fadeTo(800, 0).slideUp(500, function(){
+              $(".alert").fadeTo(3500, 0).slideUp(500, function(){
                   $(this).remove();
               });
           }, 4000);
       });    
-    </script> --}}
+    </script>
 </body>
 </html>

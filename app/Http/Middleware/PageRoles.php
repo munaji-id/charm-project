@@ -20,7 +20,8 @@ class PageRoles
       if(Auth::check() && Auth::user()->tipe_user_id == '1') {
         return $next($request);
       }
-      return redirect ('dashboard')->with('e1','You are not authorize for this page');
+      return redirect ('dashboard')->with('error_pagerole','You are not authorize for this page!');
+      // return redirect('dashboard')->with('','Modul Has Been updated successfully');
         // return back()->with('e1','You are not authorize for this page');
     }
 }

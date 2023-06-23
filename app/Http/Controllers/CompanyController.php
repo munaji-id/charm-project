@@ -7,6 +7,7 @@ use App\Company;  # Company Models
 use App\User;     # User Model
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Crypt;
 use App\Notifications\EmailNotification;  # Model Notification
 
 
@@ -16,6 +17,7 @@ class CompanyController extends Controller
     public function __construct()
     {
       $this->middleware('auth');
+      $this->middleware('pagerole');
     }
 
     # Halaman yang pertama terbuka saat membuka menu perusahaan
@@ -26,7 +28,7 @@ class CompanyController extends Controller
   }
 
     # Menampilkan form tambah perusahaan
-    public function create(Request $request)
+    public function create()
       {
           $data['title']  = 'Tambah Data Perusahaan';
           return view('pages.company.create', $data);
@@ -46,9 +48,11 @@ class CompanyController extends Controller
     }
 
     # Menampilkan halaman edit
-    public function edit(Company $company)
+    public function edit($id)
     {
       $data['title']  = 'Edit Data Perusahaan';
+      $companyID      = Crypt::decrypt($id);
+      $company        = Company::find($companyID);
       return view('pages.company.edit', compact('company'), $data);
     }
 
@@ -61,8 +65,8 @@ class CompanyController extends Controller
 
     # Menghapus data
     public function destroy(Company $company)
-    {
-        $company->delete();
-        return redirect()->route('company.index')->with('success','Company has been deleted successfully');
+    {   
+      $company->delete();
+      return redirect()->route('company.index')->with('success','Company has been deleted successfully');
     }
 }

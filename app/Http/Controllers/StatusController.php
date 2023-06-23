@@ -12,6 +12,7 @@ class StatusController extends Controller
     public function __construct()
     {
       $this->middleware('auth');
+      $this->middleware('pagerole');
     }
 
     # Halaman yang pertama terbuka saat membuka menu perusahaan
