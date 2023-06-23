@@ -3,15 +3,14 @@
   <strong>{{ $message }}</strong>.
   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="btn-close"></button>
 </div>
-@endif
-@if ($message = Session::get('e1'))
-<div class="alert alert-danger alert-dismissible fade show position-fixed" role="alert">
+@elseif ($message = Session::get('error_pagerole'))
+<div class="alert alert-fill-danger alert-dismissible fade show" role="alert">
   <strong>{{ $message }}</strong>.
   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="btn-close"></button>
 </div>
 @endif
 @if ($message = Session::get('v'))
-<div class="alert alert-danger alert-dismissible fade show position-fixed" role="alert">
+<div class="alert alert-danger alert-dismissible fade show" role="alert">
   <strong>{{ $message }}</strong>.
   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="btn-close"></button>
 </div>
