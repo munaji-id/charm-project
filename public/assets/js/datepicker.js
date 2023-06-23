@@ -1,14 +1,24 @@
 $(function() {
   'use strict';
 
-  if($('#datePickerExample').length) {
+  if($('#datePickerStart').length) {
     var date = new Date();
     var today = new Date(date.getFullYear(), date.getMonth(), date.getDate());
-    $('#datePickerExample').datepicker({
-      format: "mm/dd/yyyy",
+    $('#datePickerStart').datepicker({
+      format: "yyyy-mm-dd",
       todayHighlight: true,
       autoclose: true
     });
-    $('#datePickerExample').datepicker('setDate', today);
+    $('#datePickerStart').datepicker('setDate', today);
+  }
+  if($('#datePickerEnd').length) {
+    var date = new Date();
+    var today = new Date(date.getFullYear(), date.getMonth(), date.getDate());
+    $('#datePickerEnd').datepicker({
+      format: "yyyy-mm-dd",
+      todayHighlight: true,
+      autoclose: true
+    });
+    $('#datePickerEnd').datepicker('setDate', today);
   }
 });
