@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Status;  # Status Models
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Crypt;
+
 
 class StatusController extends Controller
 {
@@ -41,9 +43,11 @@ class StatusController extends Controller
     }
 
     # Menampilkan halaman edit
-    public function edit(Status $status)
+    public function edit($id)
     {
       $data['title']  = 'Edit Data status';
+      $statusID      = Crypt::decrypt($id);
+      $status        = Status::find($statusID);
       return view('pages.status.edit', compact('status'), $data);
     }
 

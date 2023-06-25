@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Modul;  # Modul Models
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Crypt;
+
 
 class ModulController extends Controller
 {
@@ -41,9 +43,11 @@ class ModulController extends Controller
     }
 
     # Menampilkan halaman edit
-    public function edit(Modul $modul)
+    public function edit($id)
     {
       $data['title']  = 'Edit Data Modul';
+      $modulID      = Crypt::decrypt($id);
+      $modul        = Modul::find($modulID);
       return view('pages.modul.edit', compact('modul'), $data);
     }
 
@@ -55,8 +59,11 @@ class ModulController extends Controller
     }
 
     # Menghapus data
-    public function destroy(Modul $modul)
+    public function destroy(Request $request)
     {
+        // $modul->delete();
+        $id= $request->id;
+        $modul = Modul::find($id);
         $modul->delete();
         return redirect()->route('modul.index')->with('success','Modul has been deleted successfully');
     }

@@ -16,7 +16,7 @@
       <i class="btn-icon-prepend" data-feather="printer"></i>
       Print
     </button> -->
-    <a href="{{ route('project.create') }}" class="btn btn-primary btn-icon-text mb-2 mb-md-0">
+    <a href="{{ route('project.create') }}?id=0" class="btn btn-primary btn-icon-text mb-2 mb-md-0">
       <i class="btn-icon-prepend" data-feather="user-plus"></i>
       Tambah
     </a>
@@ -36,11 +36,9 @@
                 <th>ID</th>
                 <th>Perusahaan</th>
                 <th>Nama Proyek</th>
-                <th>Modul</th>
+                {{-- <th>Modul</th> --}}
                 <th>Mulai</th>
                 <th>Selesai</th>
-                <th>Created at</th>
-                <th>Updated at</th>
                 <th>Actions</th>
               </tr>
             </thead>
@@ -50,20 +48,36 @@
                 <td>{{$project->id}}</td>
                 <td>{{$project->company->nama_perusahaan}}</td>
                 <td>{{$project->nama_proyek}}</td>
-                <td>{{$project->modul->nama_modul}}</td>
+                {{-- <td>{{$project->modul_id}}</td> --}}
                 <td>{{$project->mulai}}</td>
                 <td>{{$project->selesai}}</td>
-                <td>{{$project->created_at}}</td>
-                <td>{{$project->updated_at}}</td>
-                <td align = "center">
-                  <form action="{{ route('project.destroy', $project->id) }}" method="post">
-                    <a href="{{ route('project.edit', $project->id) }}"><i class="icon-lg text-muted pb-3px outline-primary" data-feather="edit"></i></a>
-                    @csrf
-                    @method('DELETE')
-                    <button type="submit" class="btn btn-danger">Delete</button>
-                  {{-- <a><i class="icon-lg text-muted pb-3px" data-feather="trash-2"></i></a> --}}
-                </form>
+                
+                <td>
+                  <a href="/project/{{$project->id}}" style="padding-right: 8px;" data-bs-toggle="tooltip" data-bs-placement="top" title="Detail"><i class="link-icon" data-feather="info" style="height: 18px; width: 18px;"></i></a>
+                  <a href="{{ route('project.create')}}?id={{$project->id}}" style="padding-right: 6px;" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit"><i class="link-icon" data-feather="edit" style="height: 18px; width: 18px;"></i></a>
+                  <a href="" class="text-danger" data-bs-toggle="modal" data-bs-target="#exampleModalCenter{{$project->id}}"><i class="link-icon" data-feather="trash-2" data-bs-toggle="tooltip" data-bs-placement="top" title="Hapus" style="height: 18px; width: 18px"></i></a>
                 </td>
+              </tr>
+              <div class="modal fade" id="exampleModalCenter{{$project->id}}" tabindex="-1" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalCenterTitle">Konfirmasi</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="btn-close"></button>
+                    </div>
+                    <div class="modal-body">
+                      Apakah Anda yakin akan menghapus Proyek <b>{{$project->id}} - {{$project->nama_proyek}}</b> ?
+                    </div>
+                    <div class="modal-footer">
+                      <form action="{{ route('project.destroy', $project->id) }}" method="post">
+                        @csrf
+                        @method('DELETE')
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tidak</button>
+                        <button type="submit" class="btn btn-danger">Ya</button>
+                      </form>
+                  </div>
+                </div>
+              </div>
               </tr>
               @endforeach
             </tbody>

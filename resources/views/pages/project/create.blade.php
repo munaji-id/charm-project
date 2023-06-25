@@ -30,21 +30,23 @@
 
         {{-- <h6 class="card-title">Horizontal Form</h6> --}}
 
-        <form class="forms-sample" method="post" action="{{ route('modul.store') }}" >
+        <form class="forms-sample" method="post" action="{{ route('project.store') }}" >
           @csrf
+          {{-- <input type="text" name="id" value="{{$id}}"> --}}
           <div class="row mb-3">
             <label class="col-sm-3 col-form-label">Nama Proyek</label>
             <div class="col-sm-6">
-              <input type="text" name="nama_proyek" class="form-control" placeholder="">
+              <input type="text" name="nama_proyek" value="{{$mst->nama_proyek}}" class="form-control" placeholder="">
             </div>
           </div>
           <div class="row mb-3">
             <label for="exampleInputUsername2" class="col-sm-3 col-form-label">Perusahaan</label>
             <div class="col-sm-4">
-              <select class="form-control" id="perusahaan_id">
+              <select class="form-control" name="perusahaan_id">
                 <option>Pilih Perusahaan</option>
                 @foreach ($companies as $id => $company)   
-                  <option value="{{ $id }}">{{ $company }}</option>
+                  <option value="{{ $id }}" @if ($mst->perusahaan_id == $id) selected                    
+                  @endif>{{ $company }}</option>
                 @endforeach
               </select>
             </div>
@@ -52,11 +54,11 @@
           <div class="row mb-3">
             <label for="exampleInputUsername2" class="col-sm-3 col-form-label">Modul</label>
             <div class="col-sm-4">
-              @foreach ($moduls as $id => $modul)  
+              @foreach ($moduls as $modul)  
                 <div class="form-check mb-2">
-                  <input type="checkbox" class="form-check-input" id="checkChecked" value="{{ $id }}">
+                  <input type="checkbox" class="form-check-input" id="checkChecked" @if(cek_modul($mst->id,$modul->id)>0) checked @endif value="{{ $modul->id }}" name="modul_id[]">
                   <label class="form-check-label" for="checkChecked">
-                    {{ $modul }}
+                    {{ $modul->nama_modul }}
                   </label>
                 </div>
               @endforeach

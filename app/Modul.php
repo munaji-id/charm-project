@@ -15,4 +15,14 @@ class Modul extends Model
     {
       return $this->hasMany('App\Project');
     }
+
+    // public function project_modul()
+    // {
+    //   return $this->hasMany('App\ProjectModul');
+    // }
+
+    // public function project_modul()
+    // {
+    //   return $this->belongsTo('App\ProjectModul', 'proyek_id');
+    // } 
 }

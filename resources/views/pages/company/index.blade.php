@@ -36,8 +36,6 @@
                 <th>ID</th>
                 <th>Nama Perusahaan</th>
                 <th>Alamat</th>
-                <th>Created at</th>
-                <th>Updated at</th>
                 <th>Actions</th>
               </tr>
             </thead>
@@ -47,20 +45,33 @@
                 <td>{{$company->id}}</td>
                 <td>{{$company->nama_perusahaan}}</td>
                 <td>{{$company->alamat}}</td>
-                <td>{{$company->created_at}}</td>
-                <td>{{$company->updated_at}}</td>
-                <td align = "center">
+                <td align="center">
                   @php $companyID= Crypt::encrypt($company->id); @endphp
-                  <form action="{{ route('company.destroy', $companyID) }}" method="post">
-                    <a href="{{ route('company.edit', $companyID) }}"><i class="icon-lg text-muted pb-3px outline-primary" data-feather="edit"></i></a>
-                    @php $prodID= Crypt::encrypt($company->id); @endphp
-                    @csrf
-                    @method('DELETE')
-                    <button type="submit" class="btn btn-danger">Delete</button>
-                  {{-- <a><i class="icon-lg text-muted pb-3px" data-feather="trash-2"></i></a> --}}
-                </form>
+                  <a href="{{ route('company.edit', $companyID) }}" style="padding-right: 8px;" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit"><i class="link-icon" data-feather="edit" style="height: 18px; width: 18px;"></i></a>
+                  <a href="" class="text-danger" data-bs-toggle="modal" data-bs-target="#exampleModalCenter{{$company->id}}"><i class="link-icon" data-feather="trash-2" style="height: 18px; width: 18px;" data-bs-toggle="tooltip" data-bs-placement="top" title="Hapus"></i></a>
                 </td>
+                <div class="modal fade" id="exampleModalCenter{{$company->id}}" tabindex="-1" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                  <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalCenterTitle">Konfirmasi</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="btn-close"></button>
+                      </div>
+                      <div class="modal-body">
+                        Apakah Anda yakin akan menghapus Perusahaan <b>{{$company->id}} - {{$company->nama_perusahaan}} </b> ?
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tidak</button>
+                        <form action="{{ route('company.destroy', $company->id) }}" method="post">
+                          @csrf
+                          @method('DELETE')
+                          <button type="submit" class="btn btn-danger">Ya</button>
+                        </form>
+                    </div>
+                  </div>
+                </div>
               </tr>
+              
               @endforeach
             </tbody>
           </table>

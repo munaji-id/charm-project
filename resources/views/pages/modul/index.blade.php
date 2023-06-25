@@ -36,9 +36,7 @@
                 <th>ID</th>
                 <th>Nama Modul</th>
                 <th>Deskripsi</th>
-                <th>Created at</th>
-                <th>Updated at</th>
-                <th>Actions</th>
+                <th align="center">Actions</th>
               </tr>
             </thead>
             <tbody>
@@ -47,18 +45,32 @@
                 <td>{{$modul->id}}</td>
                 <td>{{$modul->nama_modul}}</td>
                 <td>{{$modul->deskripsi}}</td>
-                <td>{{$modul->created_at}}</td>
-                <td>{{$modul->updated_at}}</td>
-                <td align = "center">
-                  <form action="{{ route('modul.destroy', $modul->id) }}" method="post">
-                    <a href="{{ route('modul.edit', $modul->id) }}"><i class="icon-lg text-muted pb-3px outline-primary" data-feather="edit"></i></a>
-                    @csrf
-                    @method('DELETE')
-                    <button type="submit" class="btn btn-danger">Delete</button>
-                  {{-- <a><i class="icon-lg text-muted pb-3px" data-feather="trash-2"></i></a> --}}
-                </form>
+                <td align="center">
+                  @php $modulID= Crypt::encrypt($modul->id); @endphp
+                  <a href="{{ route('modul.edit', $modulID) }}" style="padding-right: 8px;" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit"><i class="link-icon" data-feather="edit" style="height: 18px; width: 18px;"></i></a>
+                  <a href="" class="text-danger" data-bs-toggle="modal" data-bs-target="#exampleModalCenter{{$modul->id}}"><i class="link-icon" data-feather="trash-2" style="height: 18px; width: 18px;" data-bs-toggle="tooltip" data-bs-placement="top" title="Hapus"></i></a>
                 </td>
               </tr>
+              <div class="modal fade" id="exampleModalCenter{{$modul->id}}" tabindex="-1" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalCenterTitle">Konfirmasi</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="btn-close"></button>
+                    </div>
+                    <div class="modal-body">
+                      Apakah Anda yakin akan menghapus Modul <b>{{$modul->id}} - {{$modul->nama_modul}}</b> ?
+                    </div>
+                    <div class="modal-footer">
+                      <form action="{{ route('modul.destroy', $modul->id) }}" method="post">
+                        @csrf
+                        @method('DELETE')
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tidak</button>
+                        <button type="submit" class="btn btn-danger">Ya</button>
+                      </form>
+                  </div>
+                </div>
+              </div>
               @endforeach
             </tbody>
           </table>
