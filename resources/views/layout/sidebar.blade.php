@@ -58,8 +58,8 @@
           <span class="link-title">Status</span>
         </a>
       </li>
-      <li class="nav-item {{ active_class(['user']) }}">
-        <a href="{{ url('user') }}" class="nav-link">
+      <li class="nav-item {{ active_class(['tipeuser']) }}">
+        <a href="{{ url('tipeuser') }}" class="nav-link">
           <i class="link-icon" data-feather="user-check"></i>
           <span class="link-title">Tipe Pengguna</span>
         </a>
@@ -70,8 +70,8 @@
           <span class="link-title">Pengguna</span>
         </a>
       </li>
-      <li class="nav-item {{ active_class(['apps/calendar']) }}">
-        <a href="{{ url('/apps/calendar') }}" class="nav-link">
+      <li class="nav-item {{ active_class(['tipeattach']) }}">
+        <a href="{{ url('tipeattach') }}" class="nav-link">
           <i class="link-icon" data-feather="paperclip"></i>
           <span class="link-title">Jenis Lampiran</span>
         </a>

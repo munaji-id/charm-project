@@ -7,7 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class TipeUser extends Model
 {
-    use HasFactory;
+    // use HasFactory;
+    protected $fillable = ['nama_tipe_user', 'deskripsi'];
+    protected $table = 'tipe_users';
 
     public function user()
     {

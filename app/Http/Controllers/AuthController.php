@@ -20,7 +20,7 @@ class AuthController extends Controller
         ]);
         if (Auth::attempt(['name' => $request->name, 'password' => $request->password])) {
             $request->session()->regenerate();
-            return redirect()->intended('users');
+            return redirect()->intended('dashboard');
         }
 
         return back()->withErrors([

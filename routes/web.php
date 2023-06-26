@@ -17,6 +17,8 @@ use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\ModulController;
 use App\Http\Controllers\StatusController;
 use App\Http\Controllers\ProjectController;
+use App\Http\Controllers\TipeuserController;
+use App\Http\Controllers\TipeattachmentController;
 use App\Http\Controllers\UserController;
 
 Route::get('/', [AuthController::class, 'index'])->name('login');
@@ -42,6 +44,8 @@ Route::group(['middleware'=>'pagerole'], function(){
     Route::resource('modul', ModulController::class)->middleware('pagerole');
     Route::resource('status', StatusController::class)->middleware('pagerole');
     Route::resource('project', ProjectController::class)->middleware('pagerole');
+    Route::resource('tipeuser', TipeuserController::class)->middleware('pagerole');    
+    Route::resource('tipeattach', TipeattachmentController::class)->middleware('pagerole');
  });
     // Route::get('users', [UserController::class, 'index'])->name('users');
     // Route::get('users/create', [UserController::class, 'create'])->name('create');

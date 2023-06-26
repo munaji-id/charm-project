@@ -59,11 +59,8 @@ class ModulController extends Controller
     }
 
     # Menghapus data
-    public function destroy(Request $request)
+    public function destroy(Modul $modul)
     {
-        // $modul->delete();
-        $id= $request->id;
-        $modul = Modul::find($id);
         $modul->delete();
         return redirect()->route('modul.index')->with('success','Modul has been deleted successfully');
     }
