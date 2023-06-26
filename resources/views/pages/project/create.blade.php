@@ -82,7 +82,7 @@
               </div>
             </div>
           </div>
-          <button type="submit" class="btn btn-primary me-2">Simpan</button>
+          <button type="submit" class="btn btn-primary me-2" name="sumbit" id="submit">Simpan</button>
         </form>
       </div>
     </div>
@@ -96,4 +96,14 @@
 
 @push('custom-scripts')
   <script src="{{ asset('assets/js/datepicker.js') }}"></script>
+  <script>
+    $(document).ready(function(){
+      $("form").submit(function() {
+          $(this).submit(function() {
+            return false;
+          });
+          return true;
+      }); 
+    });
+  </script>
 @endpush

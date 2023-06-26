@@ -32,7 +32,7 @@
               <textarea name="alamat"class="form-control" id="exampleFormControlTextarea1" rows="5"></textarea>
             </div>
           </div>
-          <button type="submit" class="btn btn-primary me-2">Simpan</button>
+          <button type="submit" class="btn btn-primary me-2" name="sumbit" id="submit">Simpan</button>
         </form>
 
       </div>
@@ -45,4 +45,14 @@
 @endpush
 
 @push('custom-scripts')
+<script>
+  $(document).ready(function(){
+    $("form").submit(function() {
+        $(this).submit(function() {
+          return false;
+        });
+        return true;
+    }); 
+  });
+</script>
 @endpush
