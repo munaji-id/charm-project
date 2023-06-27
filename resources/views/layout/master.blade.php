@@ -36,7 +36,7 @@
 
   @stack('style')
 </head>
-<div class="w-100 fixed-bottom" style="padding-left: 15px;">
+<div class="w-100 fixed-bottom" style="padding-left: 15px; padding-right: 15px;">
            
   @include('flash-messages')
 </div>
