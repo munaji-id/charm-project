@@ -27,7 +27,7 @@ class ProjectController extends Controller
     # Menampilkan form tambah proyek
     public function create(request $request)
       {
-        error_reporting(0);
+          error_reporting(0);
           $data['title']  = 'Tambah Data Proyek';
           $companies = Company::pluck('nama_perusahaan', 'id');
           // $selectedCompany = Company::first()->company_id;
