@@ -36,7 +36,13 @@
           <div class="row mb-3">
             <label class="col-sm-3 col-form-label">Password</label>
             <div class="col-sm-4">
-              <input type="text" class="form-control" name="password">
+              <input type="password" class="form-control" name="password">
+            </div>
+          </div>
+          <div class="row mb-3">
+            <label class="col-sm-3 col-form-label">Password</label>
+            <div class="col-sm-4">
+              <input type="password" class="form-control" name="retype_password">
             </div>
           </div>
           <div class="row mb-3">

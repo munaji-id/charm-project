@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use Notification;
+// use Notification;
 use App\Company;  # Company Models
 use App\User;     # User Model
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
-use App\Notifications\EmailNotification;  # Model Notification
+// use App\Notifications\EmailNotification;  # Model Notification
 
 
 class CompanyController extends Controller
@@ -41,9 +41,9 @@ class CompanyController extends Controller
         'nama_perusahaan' => 'required',
         'alamat'          => 'required',
       ]);
-      $user = User::first();
+      // $user = User::first();
       Company::create($request->all());
-      Notification::send($user, new EmailNotification()); # Mengirimkan email saat berhasil di simpan
+      // Notification::send($user, new EmailNotification()); # Mengirimkan email saat berhasil di simpan
       return redirect('company');
     }
 

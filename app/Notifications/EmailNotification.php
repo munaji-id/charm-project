@@ -6,7 +6,7 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
-use App\Company;
+// use App\User;
 
 class EmailNotification extends Notification
 {
@@ -17,9 +17,11 @@ class EmailNotification extends Notification
      *
      * @return void
      */
-    public function __construct()
+    protected $user;
+
+    public function __construct($request)
     {
-        // $this->company = $company;
+        $this->request = $request;
     }
 
     /**
@@ -40,10 +42,16 @@ class EmailNotification extends Notification
      * @return \Illuminate\Notifications\Messages\MailMessage
      */
     public function toMail($notifiable)
-    {
+    {   
         return (new MailMessage)
-                    ->line('The introduction to the notification.')
-                    ->action('Notification Action', url('/'))
+                    ->subject('Pemberitahuan pembuatan akun Charm')
+                    ->greeting("Hi,  {$this->request['nama_lengkap']}")
+                    ->line('Akun Anda berhasil dibuat oleh Admin Charm.')
+                    ->line('Gunakan,')
+                    ->line("Username : {$this->request['name']}")
+                    ->line("Password : {$this->request['retype_password']}")
+                    ->line('Untuk masuk ke Aplikasi Change Request Management')
+                    ->action('Login Disini', url('/'))
                     ->line('Thank you for using our application!');
     }
 
