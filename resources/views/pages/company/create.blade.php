@@ -9,6 +9,12 @@
   <div>
     <h4 class="mb-3 mb-md-0">@yield('title', $title)</h4>
   </div>
+  <div class="d-flex align-items-center flex-wrap text-nowrap">
+    <button type="button" class="btn btn-secondary btn-icon-text mb-2 mb-md-0" onclick="history.back()">
+      <i class="btn-icon-prepend" data-feather="arrow-left"></i>
+      Kembali
+    </button>
+  </div>
 </div>
 
 <div class="row">

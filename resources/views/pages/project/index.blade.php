@@ -17,7 +17,7 @@
       Print
     </button> -->
     <a href="{{ route('project.create') }}?id=0" class="btn btn-primary btn-icon-text mb-2 mb-md-0">
-      <i class="btn-icon-prepend" data-feather="user-plus"></i>
+      <i class="btn-icon-prepend" data-feather="trello"></i>
       Tambah
     </a>
   </div>
@@ -78,7 +78,6 @@
                   </div>
                 </div>
               </div>
-              </tr>
               @endforeach
             </tbody>
           </table>

@@ -6,10 +6,10 @@ use Notification;
 use App\User; // Models
 use App\Company; // Models
 use App\TipeUser; // Models
-use App\Project; // Models
 use Hash;
 use Illuminate\Http\Request;
 use App\Notifications\EmailNotification;  # Model Notification
+use Illuminate\Support\Facades\Crypt;
 
 class UserController extends Controller
 {   
@@ -84,6 +84,30 @@ class UserController extends Controller
         // $user = User::create($request->all());
     }
         return redirect('user');
+    }
+
+    public function show(User $user)
+    {
+      $data['title']  = 'Detail Pengguna';
+      $companies      = Company::pluck('nama_perusahaan', 'id');
+      $utypes         = TipeUser::pluck('nama_tipe_user', 'id');
+      return view('pages.user.show', compact('user', 'companies', 'utypes'), $data);
+    }
+
+    public function edit($id)
+    {
+      $data['title']  = 'Edit Data Pengguna';
+      $companies      = Company::pluck('nama_perusahaan', 'id');
+      $utypes         = TipeUser::pluck('nama_tipe_user', 'id');
+      $userID         = Crypt::decrypt($id);
+      $user           = User::find($userID);
+      return view('pages.user.edit', compact('user', 'utypes', 'companies'), $data);
+    }
+
+    public function update(Request $request, $id)
+    {
+      User::find($id)->update($request->all());
+      return redirect('user')->with('success','User Has Been updated successfully');
     }
 
     public function logout(Request $request)

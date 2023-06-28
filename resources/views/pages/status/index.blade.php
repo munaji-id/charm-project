@@ -17,7 +17,7 @@
       Print
     </button> -->
     <a href="{{ route('status.create') }}" class="btn btn-primary btn-icon-text mb-2 mb-md-0">
-      <i class="btn-icon-prepend" data-feather="user-plus"></i>
+      <i class="btn-icon-prepend" data-feather="chevrons-right"></i>
       Tambah
     </a>
   </div>

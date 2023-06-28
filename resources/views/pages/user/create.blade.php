@@ -11,9 +11,9 @@
     <h4 class="mb-3 mb-md-0">@yield('title', $title)</h4>
   </div>
   <div class="d-flex align-items-center flex-wrap text-nowrap">
-    <button type="button" class="btn btn-primary btn-icon-text mb-2 mb-md-0">
-      <i class="btn-icon-prepend" data-feather="user-plus"></i>
-      Tambah
+    <button type="button" class="btn btn-secondary btn-icon-text mb-2 mb-md-0" onclick="history.back()">
+      <i class="btn-icon-prepend" data-feather="arrow-left"></i>
+      Kembali
     </button>
   </div>
 </div>
@@ -87,7 +87,7 @@
               <input type="number" class="form-control" name="kontak">
             </div>
           </div>
-          <button type="submit" class="btn btn-primary me-2">Simpan</button>
+          <button type="submit" class="btn btn-primary me-2" name="sumbit" id="submit">Simpan</button>
         </form>
 
       </div>
@@ -103,4 +103,14 @@
 
 @push('custom-scripts')
   <script src="{{ asset('assets/js/data-table.js') }}"></script>
+  <script>
+    $(document).ready(function(){
+      $("form").submit(function() {
+          $(this).submit(function() {
+            return false;
+          });
+          return true;
+      }); 
+    });
+  </script>
 @endpush

@@ -33,7 +33,8 @@
           <table id="dataTableExample" class="table">
             <thead>
               <tr>
-                <th>USerid</th>
+                <th>USerid</th>                
+                <th>Status</th>
                 <th>Username</th>
                 <th>Nama Lengkap</th>
                 <th>Perusahaan</th>
@@ -41,7 +42,6 @@
                 <th>Email</th>
                 <th>Contact</th>
                 <th>Last Seen</th>
-                <th>Status</th>
                 <th>Actions</th>
               </tr>
             </thead>
@@ -49,6 +49,13 @@
               @foreach($users as $user)
               <tr>
                 <td>{{$user->id}}</td>
+                <td>
+                  @if(Cache::has('user-is-online-' . $user->id))
+                    <span class="text-success">Online</span>
+                  @else
+                    <span class="text-secondary">Offline</span>
+                  @endif
+                </td>
                 <td>{{$user->name}}</td>
                 <td>{{$user->nama_lengkap}}</td>
                 <td>{{$user->company->nama_perusahaan}}</td>
@@ -57,17 +64,34 @@
                 <td>{{$user->kontak}}</td>
                 <td>{{ Carbon\Carbon::parse($user->last_seen)->diffForHumans() }}</td>
                 <td>
-                  @if(Cache::has('user-is-online-' . $user->id))
-                    <span class="text-success">Online</span>
-                  @else
-                    <span class="text-secondary">Offline</span>
+                  @php $userID= Crypt::encrypt($user->id); @endphp
+                  <a href="/user/{{$user->id}}" style="padding-right: 8px;" data-bs-toggle="tooltip" data-bs-placement="top" title="Detail"><i class="link-icon" data-feather="info" style="height: 18px; width: 18px;"></i></a>
+                  <a href="{{ route('user.edit', $userID) }}" style="padding-right: 6px;" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit"><i class="link-icon" data-feather="edit" style="height: 18px; width: 18px;"></i></a>
+                  @if( Auth::user()->id <> $user->id)
+                  <a href="" class="text-danger" data-bs-toggle="modal" data-bs-target="#exampleModalCenter{{$user->id}}"><i class="link-icon" data-feather="trash-2" data-bs-toggle="tooltip" data-bs-placement="top" title="Hapus" style="height: 18px; width: 18px"></i></a>
                   @endif
                 </td>
-                <td align = "center">
-                  <a><i class="icon-lg text-muted pb-3px outline-primary" data-feather="edit"></i></a>
-                  <a><i class="icon-lg text-muted pb-3px" data-feather="trash-2"></i></a>
-                </td>
               </tr>
+              <div class="modal fade" id="exampleModalCenter{{$user->id}}" tabindex="-1" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalCenterTitle">Konfirmasi</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="btn-close"></button>
+                    </div>
+                    <div class="modal-body">
+                      Apakah Anda yakin akan menghapus Username <b>{{$user->id}} - {{$user->name}}</b> ?
+                    </div>
+                    <div class="modal-footer">
+                      <form action="{{ route('project.destroy', $user->id) }}" method="post">
+                        @csrf
+                        @method('DELETE')
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tidak</button>
+                        <button type="submit" class="btn btn-danger">Ya</button>
+                      </form>
+                  </div>
+                </div>
+              </div>
               @endforeach
             </tbody>
           </table>
