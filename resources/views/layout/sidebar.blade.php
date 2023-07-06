@@ -20,14 +20,14 @@
       </li>
       
       <li class="nav-item nav-category">Apps</li>
-      <li class="nav-item {{ active_class(['master-data/master-pengguna']) }}">
-        <a href="{{ url('/master-data/master-pengguna') }}" class="nav-link">
+      <li class="nav-item {{ active_class(['cr']) }}">
+        <a href="{{ url('cr') }}" class="nav-link">
           <i class="link-icon" data-feather="git-pull-request"></i>
           <span class="link-title">Change Request</span>
         </a>
       </li>
-      <li class="nav-item {{ active_class(['master-data/master-pengguna']) }}">
-        <a href="{{ url('/master-data/master-pengguna') }}" class="nav-link">
+      <li class="nav-item {{ active_class(['cr2']) }}">
+        <a href="{{ url('cr') }}" class="nav-link">
           <i class="link-icon" data-feather="search"></i>
           <span class="link-title">Pencarian CR</span>
         </a>

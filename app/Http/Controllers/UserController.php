@@ -32,8 +32,8 @@ class UserController extends Controller
         $companies      = Company::pluck('nama_perusahaan', 'id');
         $utypes         = TipeUser::pluck('nama_tipe_user', 'id');
         $id             = $request->id;
-        $mst            = Project::where('id',$request->id)->first();
-        return view('pages.user.create', compact('companies', 'mst', 'id', 'utypes'), $data);
+        // $mst            = Project::where('id',$request->id)->first();
+        return view('pages.user.create', compact('companies', 'id', 'utypes'), $data);
     }
 
     # Menyimpan data proyek

@@ -20,22 +20,22 @@ class ProjectController extends Controller
     # Halaman yang pertama terbuka saat membuka menu proyek
     public function index() {
       $data['title']  = 'Master Data Proyek';
-      $projects      = Project::all();
+      $projects       = Project::all();
       return view('pages.project.index', compact('projects'), $data);
-  }
+    }
 
     # Menampilkan form tambah proyek
     public function create(request $request)
-      {
-          error_reporting(0);
-          $data['title']  = 'Tambah Data Proyek';
-          $companies = Company::pluck('nama_perusahaan', 'id');
-          // $selectedCompany = Company::first()->company_id;
-          $id=$request->id;
-          $mst    = Project::where('id',$request->id)->first();
-          $moduls      = Modul::all();
-          return view('pages.project.create', compact('companies', 'moduls','mst','id'), $data);
-      }
+    {
+      error_reporting(0);
+      $data['title']  = 'Tambah Data Proyek';
+      $companies = Company::pluck('nama_perusahaan', 'id');
+      // $selectedCompany = Company::first()->company_id;
+      $id=$request->id;
+      $mst    = Project::where('id', $request->id)->first();
+      $moduls      = Modul::all();
+      return view('pages.project.create', compact('companies', 'moduls','mst','id'), $data);
+    }
     
     # Menyimpan data proyek
     public function store(Request $request)

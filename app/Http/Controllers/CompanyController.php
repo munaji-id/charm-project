@@ -21,18 +21,19 @@ class CompanyController extends Controller
     }
 
     # Halaman yang pertama terbuka saat membuka menu perusahaan
-    public function index() {
+    public function index()
+    {
       $data['title']  = 'Master Data Perusahaan';
       $companies      = Company::all();
       return view('pages.company.index', compact('companies'), $data);;
-  }
+    }
 
     # Menampilkan form tambah perusahaan
     public function create()
-      {
-          $data['title']  = 'Tambah Data Perusahaan';
-          return view('pages.company.create', $data);
-      }
+    {
+      $data['title']  = 'Tambah Data Perusahaan';
+      return view('pages.company.create', $data);
+    }
     
     # Menyimpan data perusahaan
     public function store(Request $request)

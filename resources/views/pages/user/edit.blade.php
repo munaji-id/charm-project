@@ -53,7 +53,7 @@
             </div>
           </div>
           <div class="row mb-3">
-            <label for="exampleInputUsername2" class="col-sm-3 col-form-label">Perusahaan</label>
+            <label for="exampleInputUsername2" class="col-sm-3 col-form-label">Tipe Pengguna</label>
             <div class="col-sm-4">
               <select class="form-control" name="tipe_user_id">
                 <option>Pilih Tipe Pengguna</option>

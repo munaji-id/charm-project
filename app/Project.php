@@ -26,4 +26,9 @@ class Project extends Model
     {
       return $this->belongsTo('App\Modul', 'modul_id');
     }
+
+    public function cr()
+    {
+      return $this->hasMany('App\Cr');
+    }
 }

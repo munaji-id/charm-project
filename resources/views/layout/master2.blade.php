@@ -8,7 +8,7 @@
 	<meta name="author" content="Munaji">
 	<meta name="keywords" content="">
 
-  <title>@yield('title', $title)</title>
+  {{-- <title>@yield('title', $title)</title> --}}
 
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">

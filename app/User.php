@@ -19,8 +19,7 @@ class User extends Authenticatable
      *
      * @var array
      */
-    protected $fillable = [
-        'tipe_user_id', 'perusahaan_id', 'name', 'email', 'password', 'nama_lengkap', 'kontak', 'last_seen'
+    protected $fillable = ['tipe_user_id', 'perusahaan_id', 'name', 'email', 'password', 'nama_lengkap', 'kontak', 'last_seen'
     ];
 
     /**
@@ -58,5 +57,10 @@ class User extends Authenticatable
     public function tipeuser()
     {
       return $this->belongsTo('App\TipeUser', 'tipe_user_id');
+    }
+
+    public function cr()
+    {
+      return $this->hasMany('App\Cr');
     }
 }

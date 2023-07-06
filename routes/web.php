@@ -20,6 +20,7 @@ use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\TipeuserController;
 use App\Http\Controllers\TipeattachmentController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\CrController;
 
 Route::get('/', [AuthController::class, 'index'])->name('login');
 
@@ -33,6 +34,9 @@ Route::get('master-data', function () {
 Route::get('login', [AuthController::class, 'index'])->name('login');
 Route::post('login', [AuthController::class, 'login'])->name('login');
 Route::get('logout', [AuthController::class, 'logout'])->name('logout');
+Route::resource('cr', CrController::class);
+Route::get('/getModul/{id}', [CrController::class, 'getModul']);
+
 // Route::group(['prefix' => 'master-data'], function(){
 //     Route::get('users', [UserController::class, 'index'])->name('users');
 //     Route::get('users/create', [UserController::class, 'create'])->name('create');
