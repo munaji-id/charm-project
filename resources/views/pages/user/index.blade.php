@@ -83,7 +83,7 @@
                       Apakah Anda yakin akan menghapus Username <b>{{$user->id}} - {{$user->name}}</b> ?
                     </div>
                     <div class="modal-footer">
-                      <form action="{{ route('project.destroy', $user->id) }}" method="post">
+                      <form action="{{ route('user.destroy', $user->id) }}" method="post">
                         @csrf
                         @method('DELETE')
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tidak</button>
