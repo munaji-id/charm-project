@@ -175,7 +175,7 @@
 
            // AJAX request 
            $.ajax({
-               url: 'http://localhost:8000/getModul/'+id,
+               url: '{{url('getModul')}}/'+id,
                type: 'get',
                dataType: 'json',
                success: function(response){
