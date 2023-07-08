@@ -34,7 +34,7 @@
 
   @stack('style')
 </head>
-<body data-base-url="{{url('/')}}">
+<body data-base-url="{{url('/')}}" class="loaded">
 
   <script src="{{ asset('assets/js/spinner.js') }}"></script>
 
@@ -43,7 +43,6 @@
       @yield('content')
     </div>
   </div>
-
     <!-- base js -->
     <script src="{{ asset('js/app.js') }}"></script>
     <script src="{{ asset('assets/plugins/feather-icons/feather.min.js') }}"></script>

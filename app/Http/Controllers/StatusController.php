@@ -35,7 +35,8 @@ class StatusController extends Controller
     public function store(Request $request)
     {
       $request->validate([
-        'nama_status'         => 'required',
+        'id'                 => 'required',
+        'nama_status'        => 'required',
         'deskripsi'          => 'required',
       ]);
       status::create($request->all());

@@ -2,7 +2,9 @@
 
 @section('content')
 <div class="page-content d-flex align-items-center justify-content-center">
-
+  <div class="animation-effect-1">
+    <i class="feather icon-circle effect-icon text-primary"></i>
+  </div>
   <div class="row w-100 mx-0 auth-page">
     <div class="col-md-8 col-xl-6 mx-auto">
       <div class="card">

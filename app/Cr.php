@@ -4,23 +4,40 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Haruncpi\LaravelIdGenerator\IdGenerator;
 
 class Cr extends Model
 {
     // use HasFactory;
-    protected $fillable = ['id', 'user_id', 'modul_id', 'status_id'];
+    public $primaryKey = 'id';
+    public $incrementing = false;
+    // protected $casts = [id' => 'string'];
+    protected $fillable = ['id',
+                           'user_id',
+                           'proyek_id',
+                           'modul_id',
+                           'status_id',
+                           'judul',
+                           'deskripsi',
+                           'developer',
+                           'tester',
+                           'it_operator',
+                           'current',
+                           'batas_waktu',
+                          ];
     protected $table = 'change_requests';
+    
 
     public static function boot(){
         parent::boot();
         self::creating(function ($model) {
-            $model->uuid = IdGenerator::generate(['table' => $this->table, 'length' => 6, 'prefix' =>date('y')]);
+            $model->id = IdGenerator::generate(['table' => 'change_requests', 'length' => 7, 'prefix' => 'CR']);
         });
     }
 
-    public function proyek()
+    public function project()
     {
-      return $this->belongsTo('App\modul', 'proyek_id');
+      return $this->belongsTo('App\project', 'proyek_id');
     }
 
     public function user()
@@ -31,5 +48,10 @@ class Cr extends Model
     public function modul()
     {
       return $this->belongsTo('App\modul', 'modul_id');
+    }
+
+    public function status()
+    {
+      return $this->belongsTo('App\status', 'status_id');
     }
 }

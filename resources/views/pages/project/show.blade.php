@@ -2,6 +2,13 @@
 
 @push('plugin-styles')
 <link href="{{ asset('assets/plugins/bootstrap-datepicker/bootstrap-datepicker.min.css') }}" rel="stylesheet" />
+<style>
+  table td {
+    word-break: break-word;
+    vertical-align: top;
+    white-space: normal !important;
+  }
+</style>
 @endpush
 
 @section('content')

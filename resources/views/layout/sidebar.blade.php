@@ -32,27 +32,74 @@
           <span class="link-title">Pencarian CR</span>
         </a>
       </li>
-
       <li class="nav-item nav-category">master data</li>
-      <li class="nav-item {{ active_class(['company']) }} or {{ active_class(['company/create']) }} ">
+      <li class="nav-item {{ active_class(['company*']) }} or
+        {{ active_class(['modul*']) }} or
+        {{ active_class(['project*']) }}">
+        <a class="nav-link" data-bs-toggle="collapse" href="#masterdata" role="button" aria-expanded="{{ is_active_route(['company*']) }} or
+        {{ is_active_route(['modul*']) }} or 
+        {{ is_active_route(['project*']) }} or
+        {{ is_active_route(['status*']) }} or
+        {{ is_active_route(['tipeuser*']) }} or
+        {{ is_active_route(['user*']) }} or
+        {{ is_active_route(['tipeattach*']) }}
+        " aria-controls="masterdata">
+          <i class="link-icon" data-feather="database"></i>
+          <span class="link-title">Master Data</span>
+          <i class="link-arrow" data-feather="chevron-down"></i>
+        </a>
+        <div class="collapse {{ show_class(['company*']) }} or
+        {{ show_class(['modul*']) }} or 
+        {{ show_class(['project*']) }} or
+        {{ show_class(['status*']) }} or
+        {{ show_class(['tipeuser*']) }} or
+        {{ show_class(['tipeuser*']) }} or
+        {{ show_class(['user*']) }} or
+        {{ show_class(['tipeattach*']) }}" id="masterdata">
+          <ul class="nav sub-menu">
+            <li class="nav-item">
+              <a href="{{ url('company') }}" class="nav-link {{ active_class(['company*']) }}">Perusahaan</a>
+            </li>
+            <li class="nav-item">
+              <a href="{{ url('modul') }}" class="nav-link {{ active_class(['modul*']) }}">Modul</a>
+            </li>
+            <li class="nav-item">
+              <a href="{{ url('project') }}" class="nav-link {{ active_class(['project*']) }}">Proyek</a>
+            </li>
+            <li class="nav-item">
+              <a href="{{ url('status') }}" class="nav-link {{ active_class(['status*']) }}">Status</a>
+            </li>
+            <li class="nav-item">
+              <a href="{{ url('tipeuser') }}" class="nav-link {{ active_class(['tipeuser*']) }}">Tipe Pengguna</a>
+            </li>
+            <li class="nav-item">
+              <a href="{{ url('user') }}" class="nav-link {{ active_class(['user*']) }}">Pengguna</a>
+            </li>
+            <li class="nav-item">
+              <a href="{{ url('tipeattach') }}" class="nav-link {{ active_class(['tipeattach*']) }}">Tipe Lampiran</a>
+            </li>
+          </ul>
+        </div>
+      </li>
+      {{-- <li class="nav-item {{ active_class(['company']) }} or {{ active_class(['company/create']) }} ">
         <a href="{{ url('company') }}" class="nav-link">
           <i class="link-icon" data-feather="briefcase"></i>
           <span class="link-title">Perusahaan</span>
         </a>
-      </li>
-      <li class="nav-item {{ active_class(['modul']) }} or {{ active_class(['modul/create']) }} ">
+      </li> --}}
+      {{-- <li class="nav-item {{ active_class(['modul']) }} or {{ active_class(['modul/create']) }} ">
         <a href="{{ url('modul') }}" class="nav-link">
           <i class="link-icon" data-feather="layers"></i>
           <span class="link-title">Modul</span>
         </a>
-      </li>
-      <li class="nav-item {{ active_class(['project']) }} or {{ active_class(['project/create']) }}">
+      </li> --}}
+      {{-- <li class="nav-item {{ active_class(['project']) }} or {{ active_class(['project/create']) }}">
         <a href="{{ url('project') }}" class="nav-link">
           <i class="link-icon" data-feather="trello"></i>
           <span class="link-title">Proyek</span>
         </a>
-      </li>
-      <li class="nav-item {{ active_class(['status']) }} or {{ active_class(['status/create']) }} ">
+      </li> --}}
+      {{-- <li class="nav-item {{ active_class(['status']) }} or {{ active_class(['status/create']) }} ">
         <a href="{{ url('status') }}" class="nav-link">
           <i class="link-icon" data-feather="chevrons-right"></i>
           <span class="link-title">Status</span>
@@ -75,7 +122,7 @@
           <i class="link-icon" data-feather="paperclip"></i>
           <span class="link-title">Jenis Lampiran</span>
         </a>
-      </li>
+      </li> --}}
 
       <li class="nav-item nav-category">repositori</li>
       <li class="nav-item {{ active_class(['general/*']) }}">

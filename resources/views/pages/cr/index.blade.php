@@ -33,23 +33,31 @@
           <table id="dataTableExample" class="table">
             <thead>
               <tr>
-                <th>ID</th>
+                <th>#</th>
+                <th>Nomor CR</th>
+                <th>Judul</th>
                 <th>Nama Proyek</th>
-                {{-- <th>Modul</th> --}}
-                <th>Mulai</th>
-                <th>Selesai</th>
+                <th>Modul</th>
+                <th>Status</th>
+                <th>Due Date</th>
+                <th>Create At</th>
                 <th>Actions</th>
               </tr>
             </thead>
             <tbody>
+              @php
+                $n = 1
+              @endphp
               @foreach($crs as $cr)
               <tr>
+                <td>{{ $n++ }}</td>
                 <td>{{$cr->id}}</td>
+                <td>{{$cr->judul}}</td>
                 <td>{{$cr->nama_proyek}}</td>
-                {{-- <td>{{$project->modul_id}}</td> --}}
-                <td>{{$cr->mulai}}</td>
-                <td>{{$cr->selesai}}</td>
-                
+                <td>{{$cr->modul->nama_modul}}</td>
+                <td>{{$cr->status->nama_status}}</td>
+                <td>{{$cr->batas_waktu}}</td>                
+                <td>{{$cr->created_at}}</td>                
                 <td>
                   <a href="/project/{{$cr->id}}" style="padding-right: 8px;" data-bs-toggle="tooltip" data-bs-placement="top" title="Detail"><i class="link-icon" data-feather="info" style="height: 18px; width: 18px;"></i></a>
                   <a href="{{ route('project.create')}}?id={{$cr->id}}" style="padding-right: 6px;" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit"><i class="link-icon" data-feather="edit" style="height: 18px; width: 18px;"></i></a>
