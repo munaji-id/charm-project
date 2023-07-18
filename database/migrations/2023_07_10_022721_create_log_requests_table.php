@@ -13,10 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('attachments', function (Blueprint $table) {
+        Schema::create('log_requests', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('attachment_id')->unsigned();
-            $table->foreign('attachment_id')->references('id')->on('tipe_attachments')->onUpdate('cascade')->onDelete('cascade');
+            $table->string('cr_id', 11);
+            $table->foreign('cr_id')->references('id')->on('change_requests')->onUpdate('cascade')->onDelete('cascade');
+            $table->string('log', 255);
             $table->timestamps();
         });
     }
@@ -28,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('attachments');
+        Schema::dropIfExists('log_requests');
     }
 };

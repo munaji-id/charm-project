@@ -25,7 +25,7 @@
 
         {{-- <h6 class="card-title">Horizontal Form</h6> --}}
 
-        <form class="forms-sample" method="post" action="{{ route('user.store') }}" >
+        <form method="post" action="{{ route('user.store') }}" >
           @csrf
           <div class="row mb-3">
             <label class="col-sm-3 col-form-label">Username</label>
@@ -40,7 +40,7 @@
             </div>
           </div>
           <div class="row mb-3">
-            <label class="col-sm-3 col-form-label">Password</label>
+            <label class="col-sm-3 col-form-label">Retype Password</label>
             <div class="col-sm-4">
               <input type="password" class="form-control" name="retype_password">
             </div>
@@ -64,7 +64,7 @@
             </div>
           </div>
           <div class="row mb-3">
-            <label for="exampleInputUsername2" class="col-sm-3 col-form-label">Perusahaan</label>
+            <label for="exampleInputUsername2" class="col-sm-3 col-form-label">Tipe Pengguna</label>
             <div class="col-sm-4">
               <select class="form-control" name="tipe_user_id">
                 <option>Pilih Tipe Pengguna</option>

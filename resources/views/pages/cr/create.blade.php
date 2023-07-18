@@ -1,7 +1,7 @@
 @extends('layout.master')
 
 @push('plugin-styles')
-<link href="{{ asset('assets/plugins/bootstrap-datepicker/bootstrap-datepicker.min.css') }}" rel="stylesheet" />
+  <link href="{{ asset('assets/plugins/bootstrap-datepicker/bootstrap-datepicker.min.css') }}" rel="stylesheet" />
   <link href="{{ asset('assets/plugins/prismjs/prism.css') }}" rel="stylesheet" />
 @endpush
 
@@ -74,7 +74,7 @@
             <label class="col-sm-3 col-form-label">Proyek</label>
             <div class="col-sm-4">
               <select id="proyek_id" class="form-control" name="proyek_id">
-                <option value="0">-- Pilih Proyek --</option>
+                <option value="">-- Pilih Proyek --</option>
                 @foreach ($projects as $id => $project)   
                   <option value="{{ $id }}" @if ($mst->proyek_id == $id) selected                    
                   @endif>{{ $project }}</option>
@@ -86,7 +86,7 @@
             <label class="col-sm-3 col-form-label">Modul</label>
             <div class="col-sm-4">
               <select id="modul_id" class="form-control" name="modul_id" >
-                <option value="0">-- Pilih Modul --</option>
+                <option value="">-- Pilih Modul --</option>
                 {{-- @foreach ($moduls as $id => $modul)   
                   <option value="{{ $id }}" @if ($mst->modul_id == $id) selected                    
                   @endif>{{ $modul }}</option>
@@ -98,7 +98,7 @@
             <label class="col-sm-3 col-form-label">Tester</label>
             <div class="col-sm-4">
               <select class="form-control" name="tester">
-                <option>-- Pilih Tester --</option>
+                <option value="">-- Pilih Tester --</option>
                 @foreach ($testers as $id => $tester)   
                   <option value="{{ $id }}" @if ($mst->user_id == $id) selected                    
                   @endif>{{ $tester }}</option>
@@ -106,12 +106,12 @@
               </select>
             </div>
           </div>
-          @if(Auth::user()->tipe_user_id <> '0')
+          @if(Auth::user()->tipe_user_id <> '5')
           <div class="row mb-3">
             <label class="col-sm-3 col-form-label">Developer</label>
             <div class="col-sm-4">
               <select class="form-control" name="developer">
-                <option>-- Pilih Developer --</option>
+                <option value="">>-- Pilih Developer --</option>
                 @foreach ($developers as $id => $developer)   
                   <option value="{{ $id }}" @if ($mst->user_id == $id) selected                    
                   @endif>{{ $developer }}</option>
@@ -120,10 +120,10 @@
             </div>
           </div>
           <div class="row mb-3">
-            <label class="col-sm-3 col-form-label">Developer</label>
+            <label class="col-sm-3 col-form-label">IT Operator</label>
             <div class="col-sm-4">
               <select class="form-control" name="it_operator">
-                <option>-- Pilih Developer --</option>
+                <option value="">>-- Pilih Developer --</option>
                 @foreach ($developers as $id => $developer)   
                   <option value="{{ $id }}" @if ($mst->user_id == $id) selected                    
                   @endif>{{ $developer }}</option>

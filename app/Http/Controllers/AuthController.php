@@ -7,13 +7,6 @@ use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
-    # Digunakan untuk memvalidasi apakah yang mengakses halaman ini sudah login atau belum
-    // public function __construct()
-    // {
-    //   $this->middleware('auth');
-    //   $this->middleware('pagerole');
-    // }
-
     public function index() {
         $data['title'] = 'Charm - Login';
         return view('pages.auth.login', $data);
@@ -31,7 +24,7 @@ class AuthController extends Controller
         }
 
         return back()->withErrors([
-            'password' => 'Wrong username or password',
+            'password' => 'Username dan password tidak sesuai',
         ]);
     }
 

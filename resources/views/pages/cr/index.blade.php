@@ -55,12 +55,30 @@
                 <td>{{$cr->judul}}</td>
                 <td>{{$cr->nama_proyek}}</td>
                 <td>{{$cr->modul->nama_modul}}</td>
-                <td>{{$cr->status->nama_status}}</td>
+                <td><span 
+                      @if ($cr->status_id == 'S1')
+                        class="badge bg-primary"
+                      @elseif($cr->status_id == 'S2')
+                        class="badge bg-secondary"            
+                      @elseif($cr->status_id == 'S3')
+                        class="badge bg-warning"            
+                      @elseif($cr->status_id == 'S4')
+                        class="badge bg-info"            
+                      @elseif($cr->status_id == 'S5')
+                        class="badge bg-success"            
+                      @elseif($cr->status_id == 'S6')
+                        class="badge bg-info"            
+                      @elseif($cr->status_id == 'S8')
+                        class="badge bg-danger"            
+                      @elseif($cr->status_id == 'S9')
+                        class="badge bg-dark"            
+                      @endif
+                  >{{$cr->status->nama_status}}</span></td>
                 <td>{{$cr->batas_waktu}}</td>                
                 <td>{{$cr->created_at}}</td>                
                 <td>
                   <a href="/project/{{$cr->id}}" style="padding-right: 8px;" data-bs-toggle="tooltip" data-bs-placement="top" title="Detail"><i class="link-icon" data-feather="info" style="height: 18px; width: 18px;"></i></a>
-                  <a href="{{ route('project.create')}}?id={{$cr->id}}" style="padding-right: 6px;" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit"><i class="link-icon" data-feather="edit" style="height: 18px; width: 18px;"></i></a>
+                  <a href="{{ route('cr.edit', $cr->id) }}" style="padding-right: 6px;" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit"><i class="link-icon" data-feather="edit" style="height: 18px; width: 18px;"></i></a>
                   <a href="" class="text-danger" data-bs-toggle="modal" data-bs-target="#exampleModalCenter{{$cr->id}}"><i class="link-icon" data-feather="trash-2" data-bs-toggle="tooltip" data-bs-placement="top" title="Hapus" style="height: 18px; width: 18px"></i></a>
                 </td>
               </tr>

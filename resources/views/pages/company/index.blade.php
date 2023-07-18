@@ -18,24 +18,16 @@
     <h4 class="mb-3 mb-md-0">@yield('title', $title) </h4>
   </div>
   <div class="d-flex align-items-center flex-wrap text-nowrap">
-    
-    <!-- <button type="button" class="btn btn-outline-primary btn-icon-text me-2 mb-2 mb-md-0">
-      <i class="btn-icon-prepend" data-feather="printer"></i>
-      Print
-    </button> -->
     <a href="{{ route('company.create') }}" class="btn btn-primary btn-icon-text mb-2 mb-md-0">
       <i class="btn-icon-prepend" data-feather="briefcase"></i>
       Tambah
     </a>
   </div>
 </div>
-
 <div class="row">
   <div class="col-md-12 grid-margin stretch-card">
     <div class="card">
       <div class="card-body">
-        <!-- <h6 class="card-title">Data Table</h6>
-        <p class="text-muted mb-3">Read the <a href="https://datatables.net/" target="_blank"> Official DataTables Documentation </a>for a full list of instructions and other options.</p> -->
         <div class="table-responsive">
           <table id="dataTableExample" class="table">
             <thead>
@@ -78,7 +70,6 @@
                   </div>
                 </div>
               </tr>
-              
               @endforeach
             </tbody>
           </table>

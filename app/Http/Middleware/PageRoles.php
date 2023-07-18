@@ -17,11 +17,11 @@ class PageRoles
      */
     public function handle(Request $request, Closure $next)
     {
-      if(Auth::check() && Auth::user()->tipe_user_id == '1') {
+      if(Auth::check() && Auth::user()->tipe_user_id == '1') { // Hanya admin yang bisa mengakses master data
         return $next($request);
       }
-      return redirect ('dashboard')->with('error_pagerole','You are not authorize for this page!');
+      // return redirect ('dashboard')->with('error_pagerole','You are not authorize for this page!');
       // return redirect('dashboard')->with('','Modul Has Been updated successfully');
-        // return back()->with('e1','You are not authorize for this page');
+        return back()->with('error_pagerole','Anda tidak dizinkan untuk membuka halaman tersebut!');
     }
 }

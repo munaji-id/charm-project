@@ -21,9 +21,6 @@
   <div class="col-md-12 grid-margin stretch-card">
     <div class="card">
       <div class="card-body">
-
-        {{-- <h6 class="card-title">Horizontal Form</h6> --}}
-
         <form class="forms-sample" method="post" action="{{ route('company.update',$company->id) }}">
           @csrf
           @method('PUT')
@@ -41,7 +38,6 @@
           </div>
           <button type="submit" class="btn btn-primary me-2">Simpan</button>
         </form>
-
       </div>
     </div>
   </div>
