@@ -45,10 +45,10 @@ class Cr extends Model
       return $this->belongsTo('App\User', 'user_id');
     }
 
-    public function modul()
-    {
-      return $this->belongsTo('App\modul', 'modul_id');
-    }
+    // public function modul()
+    // {
+    //   return $this->belongsTo('App\modul', 'modul_id');
+    // }
 
     public function status()
     {
