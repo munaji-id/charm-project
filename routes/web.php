@@ -42,6 +42,8 @@ Route::get('logout', [AuthController::class, 'logout'])->name('logout');
 //     Route::get('users', [UserController::class, 'index'])->name('users');
 //     Route::get('users/create', [UserController::class, 'create'])->name('create');
 // });
+
+//Route Halaman All User
 Route::group(['middleware'=>'pageuser'], function(){
     Route::resource('dashboard', DashboardController::class)->middleware('pageuser');
     // Route::resource('cr', CrController::class)->middleware('pageuser');
@@ -52,9 +54,10 @@ Route::group(['middleware'=>'pageuser'], function(){
     
     Route::match(['put', 'patch'],'cr/status_3/{id}', [CrController::class, 'status_3'])->name('cr.status_3')->middleware('pageuser');
     Route::get('/getModul/{id}', [CrController::class, 'getModul'])->middleware('pageuser');
-
+    Route::post('cr/upload', [CrController::class, 'upload'])->name('cr.upload')->middleware('pageuser');
  });
 
+//Route Halaman Admin
 Route::group(['middleware'=>'pagerole'], function(){
     Route::resource('user', UserController::class)->middleware('pagerole');
     Route::resource('company', CompanyController::class)->middleware('pagerole');

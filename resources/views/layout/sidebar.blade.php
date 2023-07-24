@@ -192,7 +192,7 @@
       <li class="nav-item">
         <a href="https://www.nobleui.com/laravel/documentation/docs.html" target="_blank" class="nav-link">
           <i class="link-icon" data-feather="hash"></i>
-          <span class="link-title">Documentation</span>
+          <span class="link-title">Development Server</span>
         </a>
       </li>
     </ul>

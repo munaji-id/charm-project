@@ -20,16 +20,16 @@
       </button>
       <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
         @if ($cr->status_id == 'S1')
-          <a class="dropdown-item" href="">Set Ready to Development</a>
+        <a class="dropdown-item" href="" class="text-danger" data-bs-toggle="modal" data-bs-target="#exampleModalCenter{{$cr->id}}">@yield('set_sts', $set_sts)</a>
           <a class="dropdown-item" href="">Reject</a>
         @elseif ($cr->status_id == 'S2')
-          <a class="dropdown-item" href="">Set Status Into Development</a>                    
+        <a class="dropdown-item" href="" class="text-danger" data-bs-toggle="modal" data-bs-target="#exampleModalCenter{{$cr->id}}">@yield('set_sts', $set_sts)</a>                    
           <a class="dropdown-item" href="">Reject</a>                    
         @elseif ($cr->status_id == 'S3')
           <a class="dropdown-item" href="">Reset Status Into Ready Development</a>  
-          <a class="dropdown-item" href="" href="" class="text-danger" data-bs-toggle="modal" data-bs-target="#exampleModalCenter{{$cr->id}}">Ready to Test In DEV</a>
+          <a class="dropdown-item" href="" class="text-danger" data-bs-toggle="modal" data-bs-target="#exampleModalCenter{{$cr->id}}">@yield('set_sts', $set_sts)</a>
         @elseif ($cr->status_id == 'S4')
-          <a class="dropdown-item" href="" href="" class="text-danger" data-bs-toggle="modal" data-bs-target="#exampleModalCenter{{$cr->id}}">Reset Status Into Development</a>                    
+          <a class="dropdown-item" href="" class="text-danger" data-bs-toggle="modal" data-bs-target="#exampleModalCenter{{$cr->id}}">Reset Status Into Development</a>                    
         @elseif ($cr->status_id == 'S5')                    
         @endif        
         
@@ -159,7 +159,7 @@
           <div class="row mb-3">
             <label class="col-sm-3 col-form-label">Current Processor</label>
             <div class="col-sm-4">
-              <select class="form-control" name="current">
+              <select class="form-control" name="current" @readonly(true)>
                 @foreach ($currents as $id => $current)   
                   <option value="{{ $id }}">{{ $current }}</option>
                 @endforeach
@@ -172,75 +172,77 @@
     </div>
   </div>
 </div>
+{{-- Attachments --}}
 <div class="row">
-  <div class="col-md-12">
+  <div class="col-md-12 grid-margin stretch-card">
+    <div class="card">
+      <div class="card-body">
+        <h6 class="card-title">Lampiran</h6>
+        <div class="d-flex align-items-center flex-wrap text-nowrap">
+          <button type="button" class="btn btn-primary btn-xs mb-1 mb-md-0" data-bs-toggle="modal" data-bs-target="#varyingModal" data-bs-whatever="@fat">
+            <i class="btn-icon-prepend" data-feather="clip"></i>
+            Lampiran
+          </button>
+        </div>
+        <br>
+        <div id="" class="overflow-auto border" style="max-width: auto; max-height: 250px;">
+          <div class="table-responsive">
+            <table class="table table-hover mb-0">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Dokumen</th>
+                  <th>Judul</th>
+                  <th>File</th>
+                </tr>
+              </thead>
+              <tbody>
+                @php
+                  $n = 1
+                @endphp
+                @foreach($attachments as $attachment)
+                <tr>
+                  <td>{{ $n++ }}</td>
+                  <td>{{$attachment->tipeattacment->nama_tipe_attachment}}</td>
+                  <td>{{$attachment->nama_file}}</td>
+                  <td>{{$attachment->nama_file}}</td>
+                </tr>
+                @endforeach
+                @if ($attachments->count() == 0)
+                <td colspan="9" align="center">No Data Found</td>
+                @endif
+                   
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{{-- End Attachments --}}
+{{-- Logs --}}
+<div class="row">
+  <div class="col-md-12 grid-margin stretch-card">
     <div class="card">
       <div class="card-body">
         <h6 class="card-title">Log</h6>
         <div id="" class="overflow-auto border" style="max-width: auto; max-height: 250px;">
-          <ul class="">
-            <li class="">
-              <h6 class="">Registration</h6>
-              <p>Get here on time, it's first come first serve. Be late, get turned away.</p>
+          <ul class="" style="padding: 5px">
+            @foreach($logs as $log)
+            <li class="" style="padding: 5px">
+              <h6 class="" style="padding: 3px">{{$log->created_at}}</h6>
+              <p>{{$log->log}}</p>
             </li>
-            <li class="event" data-date="2:30 - 4:00pm">
-              <h6 class="title">Opening Ceremony</h6>
-              <p>Get ready for an exciting event, this will kick off in amazing fashion with MOP & Busta Rhymes as an opening show.</p>    
-            </li>
-            <li class="">
-              <h6 class="">Registration</h6>
-              <p>Get here on time, it's first come first serve. Be late, get turned away.</p>
-            </li>
-            <li class="event" data-date="2:30 - 4:00pm">
-              <h6 class="title">Opening Ceremony</h6>
-              <p>Get ready for an exciting event, this will kick off in amazing fashion with MOP & Busta Rhymes as an opening show.</p>    
-            </li>
-            <li class="">
-              <h6 class="">Registration</h6>
-              <p>Get here on time, it's first come first serve. Be late, get turned away.</p>
-            </li>
-            <li class="event" data-date="2:30 - 4:00pm">
-              <h6 class="title">Opening Ceremony</h6>
-              <p>Get ready for an exciting event, this will kick off in amazing fashion with MOP & Busta Rhymes as an opening show.</p>    
-            </li>
-            <li class="">
-              <h6 class="">Registration</h6>
-              <p>Get here on time, it's first come first serve. Be late, get turned away.</p>
-            </li>
-            <li class="event" data-date="2:30 - 4:00pm">
-              <h6 class="title">Opening Ceremony</h6>
-              <p>Get ready for an exciting event, this will kick off in amazing fashion with MOP & Busta Rhymes as an opening show.</p>    
-            </li>
-            <li class="">
-              <h6 class="">Registration</h6>
-              <p>Get here on time, it's first come first serve. Be late, get turned away.</p>
-            </li>
-            <li class="event" data-date="2:30 - 4:00pm">
-              <h6 class="title">Opening Ceremony</h6>
-              <p>Get ready for an exciting event, this will kick off in amazing fashion with MOP & Busta Rhymes as an opening show.</p>    
-            </li>
-            <li class="">
-              <h6 class="">Registration</h6>
-              <p>Get here on time, it's first come first serve. Be late, get turned away.</p>
-            </li>
-            <li class="event" data-date="2:30 - 4:00pm">
-              <h6 class="title">Opening Ceremony</h6>
-              <p>Get ready for an exciting event, this will kick off in amazing fashion with MOP & Busta Rhymes as an opening show.</p>    
-            </li>
-            <li class="">
-              <h6 class="">Registration</h6>
-              <p>Get here on time, it's first come first serve. Be late, get turned away.</p>
-            </li>
-            <li class="event" data-date="2:30 - 4:00pm">
-              <h6 class="title">Opening Ceremony</h6>
-              <p>Get ready for an exciting event, this will kick off in amazing fashion with MOP & Busta Rhymes as an opening show.</p>    
-            </li>
+            @endforeach
           </ul>
         </div>
       </div>
     </div>
   </div>
 </div>
+{{-- End Logs --}}
+{{-- Modal Confirmation --}}
 <div class="modal fade" id="exampleModalCenter{{$cr->id}}" tabindex="-1" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
@@ -249,18 +251,91 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="btn-close"></button>
       </div>
       <div class="modal-body">
-        Apakah Anda yakin akan merubah status ke In Development ?
+        @if ($cr->status_id == 'S1')
+          Apakah Anda yakin akan merubah status ke <b>Ready to Development ?</b>
+        @elseif ($cr->status_id == 'S2')
+          Apakah Anda yakin akan merubah status ke <b>In Development ?</b>
+        @elseif ($cr->status_id == 'S3')
+          Apakah Anda yakin akan merubah status ke <b>Ready to Testing ?</b>
+        @elseif ($cr->status_id == 'S4')
+          Apakah Anda yakin akan merubah status ke <b>Successfully Tested DEV ?</b>
+        @elseif ($cr->status_id == 'S5')
+          Apakah Anda yakin akan merubah status ke <b>Ready to Testing ?</b>
+        @elseif ($cr->status_id == 'S6')
+          Apakah Anda yakin akan merubah status ke <b>Successfully Tested QA?</b>
+        @elseif ($cr->status_id == 'S7')
+          Apakah Anda yakin akan merubah status ke <b>Imported Into PROD ?</b>
+        @endif        
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tidak</button>
         <form action="{{ route('cr.status_3',$cr->id) }}" method="post">
           @csrf
           @method('PUT')
+          <input type="text" name="status_id" @if ($cr->status_id == 'S1')
+                                                       value="S2"
+                                                       @elseif ($cr->status_id == 'S2')
+                                                       value="S3"
+                                                       @elseif ($cr->status_id == 'S3')
+                                                       value="S4"
+                                                       @elseif ($cr->status_id == 'S4')
+                                                       value="S5"
+                                                       @elseif ($cr->status_id == 'S5')
+                                                       value="S6"
+                                                       @elseif ($cr->status_id == 'S6')
+                                                       value="S7"
+                                                       @elseif ($cr->status_id == 'S7')
+                                                       value="S8"
+                                                       @endif
+          >
+          <input type="text" name="developer" value="{{ $cr->developer }}">
+          <input type="text" name="proyek_id" value="{{ $cr->proyek_id }}">
           <button type="submit" class="btn btn-danger">Ya</button>
         </form>
+      </div>
     </div>
   </div>
 </div>
+{{-- End Modal Confirmation --}}
+{{-- Modal Attachment --}}
+<div class="modal fade" id="varyingModal" tabindex="-1" aria-labelledby="varyingModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="varyingModalLabel">Lampirkan Berkas</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="btn-close"></button>
+      </div>
+      <div class="modal-body">
+        <form action="{{ route('cr.upload') }}" method="POST" enctype="multipart/form-data">
+          @csrf
+          <input class="form-control" type="text" name="cr_id" value="{{ $cr->id}}">
+          <div class="mb-3">
+            <label for="recipient-name" class="form-label">Dokumen:</label>
+            <select class="form-control" name="attachment_id">
+              @foreach ($tipe_atts as $tipe_att)   
+                <option value="{{ $tipe_att->id }}">{{ $tipe_att->nama_tipe_attachment }}</option>
+              @endforeach
+            </select>
+          </div>
+          <div class="mb-3">
+            <label for="message-text" class="form-label">Judul:</label>
+            <textarea class="form-control" id="message-text" name="nama_file"></textarea>
+          </div>
+          <div class="mb-3">
+            <label class="form-label" for="formFile">File upload:</label>
+            <input class="form-control" type="file" id="formFile" name="file">
+          </div>
+        
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary">Simpan</button>
+      </div>
+      </form>
+    </div>
+  </div>
+</div>
+{{-- End Modal Attachments --}}
 @endsection
 
 @push('plugin-scripts')
