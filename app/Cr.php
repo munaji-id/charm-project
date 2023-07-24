@@ -37,7 +37,7 @@ class Cr extends Model
 
     public function project()
     {
-      return $this->belongsTo('App\project', 'proyek_id');
+      return $this->belongsTo('App\Project', 'proyek_id');
     }
 
     public function user()
@@ -47,11 +47,11 @@ class Cr extends Model
 
     public function modul()
     {
-      return $this->belongsTo('App\modul', 'modul_id');
+      return $this->belongsTo('App\Modul', 'modul_id');
     }
 
     public function status()
     {
-      return $this->belongsTo('App\status', 'status_id');
+      return $this->belongsTo('App\Status', 'status_id');
     }
 }
