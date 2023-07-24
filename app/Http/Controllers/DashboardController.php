@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Cr;  # Cr Models
+use App\Modul;  # Cr Models
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
