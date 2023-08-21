@@ -41,49 +41,54 @@ class UserController extends Controller
     {
     $user = User::first();
     $request->validate([
-        'name'              => 'required',
+        'name'              => 'required|unique:users,name,except,id',
         'perusahaan_id'     => 'required',
         'tipe_user_id'      => 'required',
-        'email'             => 'required',
+        'email'             => 'required|unique:users,email,except,id',
         'password'          => 'required',
         'retype_password'   => 'required',
         'nama_lengkap'      => 'required',
         'kontak'            => 'required',
       ]);
     //   $count=count($request->modul_id);
-    if($request->id==0) {
-        $user = User::create([
-            'tipe_user_id'  => $request->tipe_user_id,
-            'perusahaan_id' => $request->perusahaan_id,
-            'name'          => $request->name,
-            'email'         => $request->email,
-            'password'      => Hash::make($request->password),
-            'nama_lengkap'  => $request->nama_lengkap,
-            'kontak'        => $request->kontak,
-        ]);
-        Notification::send($user, new EmailNotification($request)); # Mengirimkan email saat berhasil di simpan
-        // for($x=0;$x<$count;$x++){
-        //   ProjectModul::create(['proyek_id' => $project->id,
-        //   'modul_id'  => $request->modul_id[$x]]);
-        // }
+    if($request->password <> $request->retype_password) {
+        return back()->with('error', 'Password tidak sama');
     } else {
-        $user = User::where('id',$request->id)->update([
-          'tipe_user_id'    =>$request->tipe_user_id,
-          'perusahaan_id'   =>$request->perusahaan_id,
-          'name'            =>$request->name,
-          'email'           =>$request->email,
-          'password'        =>$request->password,
-          'nama_lengkap'    =>$request->nama_lengkap,
-          'kontak'          =>$request->kontak,
-        ]);
-        // $delete=ProjectModul::where('proyek_id',$request->id)->delete();
-        // for($x=0;$x<$count;$x++){
-        //   ProjectModul::create(['proyek_id' => $request->id,
-        //   'modul_id'  => $request->modul_id[$x]]);
-        // }
-        // $user = User::create($request->all());
+        if($request->id==0) {
+            $user = User::create([
+                'tipe_user_id'  => $request->tipe_user_id,
+                'perusahaan_id' => $request->perusahaan_id,
+                'name'          => $request->name,
+                'email'         => $request->email,
+                'password'      => Hash::make($request->password),
+                'nama_lengkap'  => $request->nama_lengkap,
+                'kontak'        => $request->kontak,
+            ]);
+            Notification::send($user, new EmailNotification($request)); # Mengirimkan email saat berhasil di simpan
+            // for($x=0;$x<$count;$x++){
+            //   ProjectModul::create(['proyek_id' => $project->id,
+            //   'modul_id'  => $request->modul_id[$x]]);
+            // }
+        } else {
+            $user = User::where('id',$request->id)->update([
+              'tipe_user_id'    =>$request->tipe_user_id,
+              'perusahaan_id'   =>$request->perusahaan_id,
+              'name'            =>$request->name,
+              'email'           =>$request->email,
+              'password'        =>$request->password,
+              'nama_lengkap'    =>$request->nama_lengkap,
+              'kontak'          =>$request->kontak,
+            ]);
+            // $delete=ProjectModul::where('proyek_id',$request->id)->delete();
+            // for($x=0;$x<$count;$x++){
+            //   ProjectModul::create(['proyek_id' => $request->id,
+            //   'modul_id'  => $request->modul_id[$x]]);
+            // }
+            // $user = User::create($request->all());
+        }
+            return redirect('user')->with('success','Data berhasil disimpan');
     }
-        return redirect('user');
+
     }
 
     public function show(User $user)

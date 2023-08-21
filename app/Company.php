@@ -11,7 +11,9 @@ class Company extends Model
     use Notifiable;
 
     // use HasFactory;
-    protected $fillable = ['nama_perusahaan', 'alamat'];
+    public $primaryKey = 'id';
+    public $incrementing = false;
+    protected $fillable = ['id', 'nama_perusahaan', 'alamat'];
     protected $table = 'companies';
 
     public function user()

@@ -35,11 +35,12 @@ class ModulController extends Controller
     public function store(Request $request)
     {
       $request->validate([
+        'id'                 => 'required|unique:moduls,id,except,id',
         'nama_modul'         => 'required',
         'deskripsi'          => 'required',
       ]);
       Modul::create($request->all());
-      return redirect('modul');
+      return redirect('modul')->with('success','Data berhasil disimpan');
     }
 
     # Menampilkan halaman edit
@@ -54,14 +55,19 @@ class ModulController extends Controller
     # Menyimpan update data
     public function update(Request $request, $id)
     {
+      $request->validate([
+        // 'id'                 => 'required|unique:moduls,id,except,id',
+        'nama_modul'         => 'required',
+        'deskripsi'          => 'required',
+      ]);
       Modul::find($id)->update($request->all());
-      return redirect('modul')->with('success','Modul Has Been updated successfully');
+      return redirect('modul')->with('success','Data berhasil diupdate');
     }
 
     # Menghapus data
     public function destroy(Modul $modul)
     {
         $modul->delete();
-        return redirect()->route('modul.index')->with('success','Modul has been deleted successfully');
+        return redirect()->route('modul.index')->with('success','Data berhasil dihapus');
     }
 }

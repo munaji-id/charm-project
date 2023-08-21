@@ -34,17 +34,17 @@ class TipeattachmentController extends Controller
         public function store(Request $request)
         {
           $request->validate([
-            'nama_tipe_attachment'     => 'required',
-            'deskripsi'          => 'required',
+            'id'                    => 'required|unique:tipe_attachments,id,except,id',
+            'nama_tipe_attachment'  => 'required',
           ]);
-          tipeattach::create($request->all());
-          return redirect('tipeattach');
+          TipeAttachment::create($request->all());
+          return redirect('tipeattach')->with('success','Data berhasil disimpan');
         }
     
         # Menampilkan halaman edit
         public function edit($id)
         {
-          $data['title']  = 'Edit Data Tipe Pengguna';
+          $data['title']  = 'Edit Data Tipe Lampiran';
           $tipeID         = Crypt::decrypt($id);
           $tipeattach     = TipeAttachment::find($tipeID);
           return view('pages.tipeattach.edit', compact('tipeattach'), $data);
@@ -53,14 +53,18 @@ class TipeattachmentController extends Controller
         # Menyimpan update data
         public function update(Request $request, $id)
         {
+          $request->validate([
+            'id'                    => 'required|unique:tipe_attachments,id,except,id',
+            'nama_tipe_attachment'  => 'required',
+          ]);
           TipeAttachment::find($id)->update($request->all());
-          return redirect('tipeattach')->with('success','Tipe User Has Been updated successfully');
+          return redirect('tipeattach')->with('success','Data berhasil dirubah');
         }
     
         # Menghapus data
         public function destroy(TipeAttachment $tipeattach)
         {
             $tipeattach->delete();
-            return redirect()->route('tipeattach.index')->with('success','Tipe User has been deleted successfully');
+            return redirect()->route('tipeattach.index')->with('success','Data berhasil dihapus');
         }
 }

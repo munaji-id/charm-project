@@ -65,7 +65,8 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="btn-close"></button>
                       </div>
                       <div class="modal-body">
-                        Apakah Anda yakin akan menghapus Status <b>{{$status->id}} - {{$status->nama_status}} </b> ?
+                        Data yang mempunyai status ini juga akan terhapus!<br>
+                        Apakah Anda yakin akan menghapus Status <b>{{$status->id}} - {{$status->nama_status}} </b> ? 
                       </div>
                       <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tidak</button>

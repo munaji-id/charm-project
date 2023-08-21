@@ -34,7 +34,7 @@ class CrController extends Controller
       $data['title']  = 'Permintaan Perubahan';
       // $crs            = Cr::all();
       $user = Auth::user();
-      if ($user->perusahaan_id == 1) {
+      if ($user->perusahaan_id == 'KIT') {
         $crs  = Cr::select('change_requests.id',
                      'change_requests.judul',
                      'projects.perusahaan_id',
@@ -75,8 +75,8 @@ class CrController extends Controller
       $user           = Auth::user();
       $data['title']  = 'Tambah Permintaan Perubahan';
       $projects       = Project::where('perusahaan_id', $user->perusahaan_id)->pluck('nama_proyek', 'id');
-      $developers     = User::where('tipe_user_id', 2)->pluck('nama_lengkap', 'id');
-      $testers        = User::where('tipe_user_id', 3)->pluck('nama_lengkap', 'id');
+      $developers     = User::where('tipe_user_id', 'ABA')->pluck('nama_lengkap', 'id');
+      $testers        = User::where('tipe_user_id', 'FUN')->pluck('nama_lengkap', 'id');
       // $currents       = User::where('id', $user->id)->pluck('nama_lengkap', 'id');
       $mst            = Cr::where('id', $request->id)->first();
       return view('pages.cr.create', compact('status',
@@ -97,14 +97,17 @@ class CrController extends Controller
                       ->get();
 
       return response()->json($modul);
- }
+    }
     # Menyimpan data
     public function store(Request $request)
     {
-      // $request->validate([
-      //   'nama_perusahaan' => 'required',
-      //   'alamat'          => 'required',
-      // ]);
+      $request->validate([
+        'judul'              => 'required',
+        'deskripsi'          => 'required',
+        'proyek_id'          => 'required',
+        'modul_id'           => 'required',
+        'tester'             => 'required',
+      ]);
       $id = IdGenerator::generate(['table' => 'change_requests', 'length' => 7, 'prefix' => 'CR']);
       $user = User::where('id', $request->tester)->first();
       $project = Project::where('id', $request->proyek_id)->first();
@@ -128,7 +131,7 @@ class CrController extends Controller
         'log'   => Auth::user()->nama_lengkap.' - Permintaan perubahan dibuat dengan nomor '.$id    
       ]);
       Notification::send($user, new CrNotification($cr, $user, $project, $status));
-      return redirect('cr');
+      return redirect('cr')->with('success','Data berhasil disimpan');
     }
 
     public function edit($id)
@@ -154,9 +157,9 @@ class CrController extends Controller
       $status         = Status::all();
       $user           = Auth::user();
       $projects       = Project::where('perusahaan_id', $company->perusahaan_id)->pluck('nama_proyek', 'id');
-      $testers        = User::where('tipe_user_id', 3)->pluck('nama_lengkap', 'id');
-      $developers     = User::where('tipe_user_id', 2)->pluck('nama_lengkap', 'id');
-      $it_operators   = User::where('tipe_user_id', 4)->pluck('nama_lengkap', 'id');
+      $testers        = User::where('tipe_user_id', 'FUN')->pluck('nama_lengkap', 'id');
+      $developers     = User::where('tipe_user_id', 'ABA')->pluck('nama_lengkap', 'id');
+      $it_operators   = User::where('tipe_user_id', 'BAS')->pluck('nama_lengkap', 'id');
       $currents       = User::where('id', $cr->current)->pluck('nama_lengkap', 'id');
       $moduls         = ProjectModul::orderby('modul_id','asc')
                       ->select('project_moduls.modul_id','moduls.nama_modul')
@@ -180,6 +183,22 @@ class CrController extends Controller
                                            $data);
     }
 
+    public function update(Request $request, $id) {
+      $request->validate([
+        'judul'              => 'required',
+        'deskripsi'          => 'required',
+        'proyek_id'          => 'required',
+        'modul_id'           => 'required',
+        'tester'             => 'required',
+        'developer'          => 'required',
+        'it_operator'        => 'required',
+        'batas_waktu'        => 'required',
+      ]);
+
+      Cr::find($id)->update($request->all());
+      return back()->with('success','Permintaan perubahan berhasil dirubah');
+    }
+
     public function status_3(Request $request, $id) {
       $user_auth      = Auth::user();
       $cr             = Cr::where('id', $id)->first();
@@ -187,7 +206,7 @@ class CrController extends Controller
       $project        = Project::where('id', $request->proyek_id)->first();
       $status         = Status::where('id', $request->status_id)->first();
       if ($cr->status_id == 'S1') {
-        if ($user_auth->tipe_user_id == 3) { //Tester
+        if ($user_auth->tipe_user_id == 'FUN') { //Tester
           Cr::where('id', $id)->update(['status_id' => $request->status_id, 'current' => $cr->tester]);
           $log = Log::create([
             'cr_id' => $id,
@@ -197,7 +216,7 @@ class CrController extends Controller
           return back()->with('error','Anda tidak diperbolehkan merubah ke tahap selanjutnya');
         }
       } elseif ($cr->status_id == 'S2') {
-        if ($user_auth->tipe_user_id == 3) { //Tester
+        if ($user_auth->tipe_user_id == 'FUN') { //Tester
           if ($request->developer == '') {
             return back()->with('error','Anda belum memilih Developer');
           }
@@ -212,7 +231,7 @@ class CrController extends Controller
           return back()->with('error','Anda tidak diperbolehkan merubah ke tahap selanjutnya');
         }
       } elseif ($cr->status_id == 'S3') {
-        if ($user_auth->tipe_user_id == 2) { //Developer
+        if ($user_auth->tipe_user_id == 'ABA') { //Developer
           Cr::where('id', $id)->update(['status_id' => $request->status_id, 'current' => $cr->tester]);        } else {
           return back()->with('error','Anda tidak diperbolehkan merubah ke tahap selanjutnya');
         }
@@ -227,16 +246,19 @@ class CrController extends Controller
       }
       return back()->with('success','Permintaan Perubahan Has Been updated successfully');
     }
+    
     public function upload(Request $request) {
       $attachment = Attachment::create($request->all());
       $file = $request->file('file');
-      if ($request->attachment_id == 1) {
-        $path = 'documents\functional_spec';
-      } elseif ($request->attachment_id == 2) {
-        $path = 'documents\technical_spec';
-      } elseif ($request->attachment_id > 2) {
-        $path = 'documents\others_doc';
-      }
+      $path = public_path('');
+
+      // if ($request->attachment_id == 1) {
+      //   $path = 'documents\functional_spec';
+      // } elseif ($request->attachment_id == 2) {
+      //   $path = 'documents\technical_spec';
+      // } elseif ($request->attachment_id > 2) {
+      //   $path = 'documents\others_doc';
+      // }
       $file->move($path, $file->getClientOriginalName());
       $attachment->path = $file->getClientOriginalName();
       $attachment->save();
@@ -247,5 +269,13 @@ class CrController extends Controller
       //   $attachment->save();
       // }
       return back()->with('success','Dokumen berhasil di-upload');
+    }
+
+    public function download($file) {
+    	$filePath = public_path($file);
+      $headers = ['Content-Type: application/msword'];
+    	$fileName = time().'.docx';
+
+      return response()->download($filePath, $file, $headers);
     }
 }

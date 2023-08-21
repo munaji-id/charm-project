@@ -33,11 +33,12 @@
           </li>
           <li class="ms-3 ps-3 border-start d-flex align-items-center">
             <i class="me-1 icon-md" data-feather="lock"></i>
-            <a class="pt-1px d-none d-md-block text-body" href="#">Ganti Password</a>
-          </li>
-          <li class="ms-3 ps-3 border-start d-flex align-items-center">
-            <i class="me-1 icon-md" data-feather="video"></i>
-            <a class="pt-1px d-none d-md-block text-body" href="#">Videos</a>
+            <a class="pt-1px d-none d-md-block text-body" href="#" data-bs-toggle="modal" data-bs-target="#varyingModal" data-bs-whatever="@fat">
+              {{-- <button type="button" >
+                <i class="btn-icon-prepend" data-feather="clip"></i> --}}
+                Ganti Password
+              {{-- </button> --}}
+              </a>
           </li>
         </ul>
       </div>
@@ -100,8 +101,8 @@
               <div class="d-flex align-items-center">
                 <img class="img-xs rounded-circle" src="{{ url('https://via.placeholder.com/37x37') }}" alt="">													
                 <div class="ms-2">
-                  <p>Mike Popescu</p>
-                  <p class="tx-11 text-muted">1 min ago</p>
+                  <p>Annisa Putri</p>
+                  <p class="tx-11 text-muted">10 min ago</p>
                 </div>
               </div>
               <div class="dropdown">
@@ -118,31 +119,50 @@
             </div>
           </div>
           <div class="card-body">
-            <p class="mb-3 tx-14">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus minima delectus nemo unde quae recusandae assumenda.</p>
-            <img class="img-fluid" src="{{ url('https://via.placeholder.com/513x365') }}" alt="">
+            <p class="mb-3 tx-14">Permintaan Perubahan dibuat dan di tugaskan kepada Anda.</p>
+            
           </div>
-          <div class="card-footer">
-            <div class="d-flex post-actions">
-              <a href="javascript:;" class="d-flex align-items-center text-muted me-4">
-                <i class="icon-md" data-feather="heart"></i>
-                <p class="d-none d-md-block ms-2">Like</p>
-              </a>
-              <a href="javascript:;" class="d-flex align-items-center text-muted me-4">
-                <i class="icon-md" data-feather="message-square"></i>
-                <p class="d-none d-md-block ms-2">Comment</p>
-              </a>
-              <a href="javascript:;" class="d-flex align-items-center text-muted">
-                <i class="icon-md" data-feather="share"></i>
-                <p class="d-none d-md-block ms-2">Share</p>
-              </a>
-            </div>
-          </div>
+          
         </div>
       </div>
     </div>
   </div>
   <!-- middle wrapper end -->
 </div>
+{{-- Modal Reset Password --}}
+<div class="modal fade" id="varyingModal" tabindex="-1" aria-labelledby="varyingModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="varyingModalLabel">Ganti Password</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="btn-close"></button>
+      </div>
+      <div class="modal-body">
+        <form action="" method="POST" enctype="multipart/form-data">
+          @csrf
+          {{-- <input class="form-control" type="text" name="cr_id" value="{{ $cr->id}}"> --}}
+          <div class="mb-3">
+            <label for="recipient-name" class="form-label">Password Lama:</label>
+            <input type="password" name="password" class="form-control" >
+          </div>
+          <div class="mb-3">
+            <label for="recipient-name" class="form-label">Password Baru:</label>
+            <input type="password" name="password" class="form-control" >
+          </div>
+          <div class="mb-3">
+            <label for="message-text" class="form-label">Masukkan Ulang Password Baru:</label>
+            <input type="password" name="password"  class="form-control" >
+          </div>        
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary">Simpan</button>
+      </div>
+      </form>
+    </div>
+  </div>
+</div>
+{{-- End Modal Reset Password --}}
 @endsection
 
 @push('plugin-scripts')

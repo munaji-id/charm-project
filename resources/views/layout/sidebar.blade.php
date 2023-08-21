@@ -26,12 +26,12 @@
           <span class="link-title">Change Request</span>
         </a>
       </li>
-      <li class="nav-item {{ active_class(['cr2']) }}">
+      {{-- <li class="nav-item {{ active_class(['cr2']) }}">
         <a href="{{ url('cr') }}" class="nav-link">
           <i class="link-icon" data-feather="search"></i>
           <span class="link-title">Pencarian CR</span>
         </a>
-      </li>
+      </li> --}}
       <li class="nav-item nav-category">master data</li>
       <li class="nav-item {{ active_class(['company*']) }} or
         {{ active_class(['modul*']) }} or

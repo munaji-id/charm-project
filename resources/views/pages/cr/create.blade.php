@@ -8,13 +8,13 @@
 @section('content')
 <!-- Title -->
 <div class="d-flex justify-content-between align-items-center flex-wrap grid-margin">
-  <form class="forms-sample" method="post" action="{{ route('cr.store') }}" >
   <div>
     <h4 class="mb-3 mb-md-0">@yield('title', $title)</h4>
   </div>
+  <form class="forms-sample" method="post" action="{{ route('cr.store') }}" autocomplete="off">
   <div class="d-flex align-items-center flex-wrap text-nowrap">
     <button type="submit" class="btn btn-primary btn-icon-text me-2 mb-2 mb-md-0" name="sumbit" id="submit">Simpan</button>
-    <div class="dropdown">
+    {{-- <div class="dropdown">
       <button class="btn btn-secondary dropdown-toggle me-2 mb-2 mb-md-0" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         Actions
       </button>
@@ -23,13 +23,14 @@
         <a class="dropdown-item" href="#">Another action</a>
         <a class="dropdown-item" href="#">Something else here</a>
       </div>
-    </div>
+    </div> --}}
     <button type="button" class="btn btn-secondary btn-icon-text me-2 mb-2 mb-md-0" onclick="history.back()">
       <i class="btn-icon-prepend" data-feather="arrow-left"></i>
       Kembali
     </button>
   </div>
 </div>
+<form class="forms-sample" method="post" action="{{ route('cr.store') }}" autocomplete="off">
 <div class="row">
   <div class="col-12 grid-margin">
     <div class="card">
@@ -60,14 +61,14 @@
           <div class="row mb-3">
             <label class="col-sm-3 col-form-label">Judul</label>
             <div class="col-sm-9">
-              <input type="text" name="judul" class="form-control" placeholder="">
+              <input type="text" name="judul" class="form-control" maxlength="100">
             </div>
           </div>
           {{-- <input type="hidden" name="perusahaan_id" placeholder="" value="{{ Auth::user()->perusahaan_id}}"> --}}
           <div class="row mb-3">
             <label for="exampleInputEmail2" class="col-sm-3 col-form-label">Deskripsi</label>
             <div class="col-sm-9">
-              <textarea name="deskripsi"class="form-control" rows="5"></textarea>
+              <textarea name="deskripsi"class="form-control" rows="5" maxlength="225"></textarea>
             </div>
           </div>
           <div class="row mb-3">
@@ -106,12 +107,12 @@
               </select>
             </div>
           </div>
-          @if(Auth::user()->tipe_user_id <> '5')
+          @if(Auth::user()->tipe_user_id <> 'USE')
           <div class="row mb-3">
             <label class="col-sm-3 col-form-label">Developer</label>
             <div class="col-sm-4">
               <select class="form-control" name="developer">
-                <option value="">>-- Pilih Developer --</option>
+                <option value="">-- Pilih Developer --</option>
                 @foreach ($developers as $id => $developer)   
                   <option value="{{ $id }}" @if ($mst->user_id == $id) selected                    
                   @endif>{{ $developer }}</option>
@@ -123,7 +124,7 @@
             <label class="col-sm-3 col-form-label">IT Operator</label>
             <div class="col-sm-4">
               <select class="form-control" name="it_operator">
-                <option value="">>-- Pilih Developer --</option>
+                <option value="">-- Pilih Developer --</option>
                 @foreach ($developers as $id => $developer)   
                   <option value="{{ $id }}" @if ($mst->user_id == $id) selected                    
                   @endif>{{ $developer }}</option>
@@ -153,75 +154,6 @@
           @endif
           {{-- <button type="submit" class="btn btn-primary me-2" name="sumbit" id="submit">Simpan</button> --}}
         </form>
-      </div>
-    </div>
-  </div>
-</div>
-<div class="row">
-  <div class="col-md-12">
-    <div class="card">
-      <div class="card-body">
-        <h6 class="card-title">Log</h6>
-        <div id="" class="overflow-auto border" style="max-width: auto; max-height: 250px;">
-          <ul class="">
-            <li class="">
-              <h6 class="">Registration</h6>
-              <p>Get here on time, it's first come first serve. Be late, get turned away.</p>
-            </li>
-            <li class="event" data-date="2:30 - 4:00pm">
-              <h6 class="title">Opening Ceremony</h6>
-              <p>Get ready for an exciting event, this will kick off in amazing fashion with MOP & Busta Rhymes as an opening show.</p>    
-            </li>
-            <li class="">
-              <h6 class="">Registration</h6>
-              <p>Get here on time, it's first come first serve. Be late, get turned away.</p>
-            </li>
-            <li class="event" data-date="2:30 - 4:00pm">
-              <h6 class="title">Opening Ceremony</h6>
-              <p>Get ready for an exciting event, this will kick off in amazing fashion with MOP & Busta Rhymes as an opening show.</p>    
-            </li>
-            <li class="">
-              <h6 class="">Registration</h6>
-              <p>Get here on time, it's first come first serve. Be late, get turned away.</p>
-            </li>
-            <li class="event" data-date="2:30 - 4:00pm">
-              <h6 class="title">Opening Ceremony</h6>
-              <p>Get ready for an exciting event, this will kick off in amazing fashion with MOP & Busta Rhymes as an opening show.</p>    
-            </li>
-            <li class="">
-              <h6 class="">Registration</h6>
-              <p>Get here on time, it's first come first serve. Be late, get turned away.</p>
-            </li>
-            <li class="event" data-date="2:30 - 4:00pm">
-              <h6 class="title">Opening Ceremony</h6>
-              <p>Get ready for an exciting event, this will kick off in amazing fashion with MOP & Busta Rhymes as an opening show.</p>    
-            </li>
-            <li class="">
-              <h6 class="">Registration</h6>
-              <p>Get here on time, it's first come first serve. Be late, get turned away.</p>
-            </li>
-            <li class="event" data-date="2:30 - 4:00pm">
-              <h6 class="title">Opening Ceremony</h6>
-              <p>Get ready for an exciting event, this will kick off in amazing fashion with MOP & Busta Rhymes as an opening show.</p>    
-            </li>
-            <li class="">
-              <h6 class="">Registration</h6>
-              <p>Get here on time, it's first come first serve. Be late, get turned away.</p>
-            </li>
-            <li class="event" data-date="2:30 - 4:00pm">
-              <h6 class="title">Opening Ceremony</h6>
-              <p>Get ready for an exciting event, this will kick off in amazing fashion with MOP & Busta Rhymes as an opening show.</p>    
-            </li>
-            <li class="">
-              <h6 class="">Registration</h6>
-              <p>Get here on time, it's first come first serve. Be late, get turned away.</p>
-            </li>
-            <li class="event" data-date="2:30 - 4:00pm">
-              <h6 class="title">Opening Ceremony</h6>
-              <p>Get ready for an exciting event, this will kick off in amazing fashion with MOP & Busta Rhymes as an opening show.</p>    
-            </li>
-          </ul>
-        </div>
       </div>
     </div>
   </div>

@@ -12,6 +12,9 @@
   <div>
     <h4 class="mb-3 mb-md-0">@yield('title', $title)</h4>
   </div>
+  <form class="forms-sample" method="post" action="{{ route('cr.update',$cr->id) }}" autocomplete="off">
+    @csrf
+    @method('PUT')
   <div class="d-flex align-items-center flex-wrap text-nowrap">
     <button type="submit" class="btn btn-primary btn-icon-text me-2 mb-2 mb-md-0" name="sumbit" id="submit">Simpan</button>
     <div class="dropdown">
@@ -41,7 +44,7 @@
     </button>
   </div>
 </div>
-<form class="forms-sample" method="post" action="{{ route('cr.store') }}" >
+
 <div class="row">
   <div class="col-12 grid-margin">
     <div class="card">
@@ -140,7 +143,7 @@
               <select class="form-control" name="it_operator">
                 <option value="">-- Pilih IT Operator --</option>
                 @foreach ($it_operators as $id => $it_operator)   
-                  <option value="{{ $id }}" @if ($cr->developer == $id) selected                    
+                  <option value="{{ $id }}" @if ($cr->it_operator == $id) selected                    
                   @endif>{{ $it_operator }}</option>
                 @endforeach
               </select>
@@ -194,6 +197,7 @@
                   <th>Dokumen</th>
                   <th>Judul</th>
                   <th>File</th>
+                  <th></th>
                 </tr>
               </thead>
               <tbody>
@@ -205,7 +209,8 @@
                   <td>{{ $n++ }}</td>
                   <td>{{$attachment->tipeattacment->nama_tipe_attachment}}</td>
                   <td>{{$attachment->nama_file}}</td>
-                  <td>{{$attachment->nama_file}}</td>
+                  <td>{{$attachment->path}}</td>
+                  <td><a href="{{ route('cr.download', $attachment->path ) }}">Download</a></td>
                 </tr>
                 @endforeach
                 @if ($attachments->count() == 0)

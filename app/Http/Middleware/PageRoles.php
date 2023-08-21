@@ -17,7 +17,7 @@ class PageRoles
      */
     public function handle(Request $request, Closure $next)
     {
-      if(Auth::check() && Auth::user()->tipe_user_id == '1') { // Hanya admin yang bisa mengakses master data
+      if(Auth::check() && Auth::user()->tipe_user_id == 'ADM') { // Hanya admin yang bisa mengakses master data
         return $next($request);
       }
       // return redirect ('dashboard')->with('error_pagerole','You are not authorize for this page!');

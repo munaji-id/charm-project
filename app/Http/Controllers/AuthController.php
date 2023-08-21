@@ -17,14 +17,17 @@ class AuthController extends Controller
         $request->validate([
             'name' => 'required',
             'password' => 'required',
-        ]);
+        ],
+        ['name.required' => 'Username harus di isi',
+         'password.required' => 'Password harus di isi']);
+
         if (Auth::attempt(['name' => $request->name, 'password' => $request->password])) {
             $request->session()->regenerate();
             return redirect()->intended('dashboard');
         }
 
         return back()->withErrors([
-            'password' => 'Username dan password tidak sesuai',
+            'password' => 'Username atau password salah',
         ]);
     }
 

@@ -25,6 +25,12 @@
           @csrf
           @method('PUT')
           <div class="row mb-3">
+            <label for="exampleInputUsername2" class="col-sm-3 col-form-label">ID</label>
+            <div class="col-sm-1">
+              <input type="text" name="id" class="form-control" placeholder="Test" value="{{ $company->id }}" disabled>
+            </div>
+          </div>
+          <div class="row mb-3">
             <label for="exampleInputUsername2" class="col-sm-3 col-form-label">Nama Perusahaan</label>
             <div class="col-sm-4">
               <input type="text" name="nama_perusahaan" class="form-control" placeholder="Test" value="{{ $company->nama_perusahaan }}">

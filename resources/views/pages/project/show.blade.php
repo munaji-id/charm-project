@@ -71,16 +71,16 @@
               @php
                 $n = 1
               @endphp
-              @foreach ($project_moduls as $pmodul) 
+              @foreach ($project_moduls as $projectmod) 
               <tr>
                 <td>{{ $n++ }}</td>
-                <td>{{$pmodul->modul->nama_modul}}</td>
-                <td>{{$pmodul->modul->deskripsi}}</td>
+                <td>{{$projectmod->modul->nama_modul}}</td>
+                <td>{{$projectmod->modul->deskripsi}}</td>
                 <td>
-                  <a href="" class="text-danger" data-bs-toggle="modal" data-bs-target="#exampleModalCenter{{$project->id}}"><i class="link-icon" data-feather="trash-2" style="height: 18px; width: 18px"></i></a>
+                  <a href="" class="text-danger" data-bs-toggle="modal" data-bs-target="#exampleModalCenter{{$projectmod->modul_id}}"><i class="link-icon" data-feather="trash-2" style="height: 18px; width: 18px"></i></a>
                 </td>
               </tr>
-              <div class="modal fade" id="exampleModalCenter{{$project->id}}" tabindex="-1" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+              <div class="modal fade" id="exampleModalCenter{{$projectmod->modul_id}}" tabindex="-1" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered">
                   <div class="modal-content">
                     <div class="modal-header">
@@ -88,12 +88,13 @@
                       <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="btn-close"></button>
                     </div>
                     <div class="modal-body">
-                      Apakah Anda yakin akan menghapus Modul <b>{{$pmodul->modul->nama_modul}}</b> dari Proyek <b>{{$project->nama_proyek}}</b> ?
+                      Apakah Anda yakin akan menghapus Modul <b>{{$projectmod->modul->nama_modul}}</b> dari Proyek <b>{{$project->nama_proyek}}</b> ?
                     </div>
                     <div class="modal-footer">
-                      <form action="{{ route('project.destroy', $project->id) }}" method="post">
+                      <form action="{{ route('projectmod.destroy', $projectmod->modul_id) }}" method="post">
                         @csrf
                         @method('DELETE')
+                        <input type="hidden" name="proyek_id" value="{{$projectmod->proyek_id}}">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tidak</button>
                         <button type="submit" class="btn btn-danger">Ya</button>
                       </form>

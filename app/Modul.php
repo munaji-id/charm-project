@@ -8,7 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Modul extends Model
 {
     // use HasFactory;
-    protected $fillable = ['nama_modul', 'deskripsi'];
+    public $primaryKey = 'id';
+    public $incrementing = false;
+    protected $fillable = ['id', 'nama_modul', 'deskripsi'];
     protected $table = 'moduls';
 
     public function project()

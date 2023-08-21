@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class TipeAttachment extends Model
 {
     // use HasFactory;
-    protected $fillable = ['nama_tipe_attachment', 'deskripsi'];
+    public $incrementing = false;
+
+    protected $fillable = ['id', 'nama_tipe_attachment', 'deskripsi'];
     protected $table = 'tipe_attachments';
 }

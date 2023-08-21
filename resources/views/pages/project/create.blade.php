@@ -27,7 +27,7 @@
 
         <form class="forms-sample" method="post" action="{{ route('project.store') }}" >
           @csrf
-          {{-- <input type="text" name="id" value="{{$id}}"> --}}
+          <input type="hidden" name="id" value="{{$id}}">
           <div class="row mb-3">
             <label class="col-sm-3 col-form-label">Nama Proyek</label>
             <div class="col-sm-6">
@@ -63,7 +63,7 @@
             <label class="col-sm-3 col-form-label">Tanggal Mulai Proyek</label>
             <div class="col-sm-2">
               <div class="input-group date datepicker" id="datePickerStart">
-                <input type="text" class="form-control" name="mulai">
+                <input type="text" class="form-control" name="mulai" value="{{$mst->mulai}}">
                 <span class="input-group-text input-group-addon"><i data-feather="calendar"></i></span>
               </div>
             </div>
@@ -72,7 +72,7 @@
             <label class="col-sm-3 col-form-label">Tanggal Selesai Proyek</label>
             <div class="col-sm-2">
               <div class="input-group date datepicker" id="datePickerEnd">
-                <input type="text" class="form-control" name="selesai">
+                <input type="text" class="form-control" name="selesai" value="{{$mst->selesai}}">
                 <span class="input-group-text input-group-addon"><i data-feather="calendar"></i></span>
               </div>
             </div>

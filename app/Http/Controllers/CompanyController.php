@@ -39,13 +39,14 @@ class CompanyController extends Controller
     public function store(Request $request)
     {
       $request->validate([
+        'id'              => 'required|unique:companies,id,except,id',
         'nama_perusahaan' => 'required',
         'alamat'          => 'required',
       ]);
       // $user = User::first();
       Company::create($request->all());
       // Notification::send($user, new EmailNotification()); # Mengirimkan email saat berhasil di simpan
-      return redirect('company');
+      return redirect('company')->with('success','Data berhasil disimpan');
     }
 
     # Menampilkan halaman edit
@@ -60,6 +61,11 @@ class CompanyController extends Controller
     # Menyimpan update data
     public function update(Request $request, $id)
     {
+      $request->validate([
+        // 'id'              => 'required|unique:companies,id,except,id',
+        'nama_perusahaan' => 'required',
+        'alamat'          => 'required',
+      ]);
       Company::find($id)->update($request->all());
       return redirect('company')->with('success','Company Has Been updated successfully');
     }

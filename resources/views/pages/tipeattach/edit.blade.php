@@ -29,6 +29,12 @@
           @csrf
           @method('PUT')
           <div class="row mb-3">
+            <label for="exampleInputUsername2" class="col-sm-3 col-form-label">ID</label>
+            <div class="col-sm-4">
+              <input type="text" name="id" class="form-control"  value="{{ $tipeattach->id }}" disabled>
+            </div>
+          </div>
+          <div class="row mb-3">
             <label for="exampleInputUsername2" class="col-sm-3 col-form-label">Nama Tipe Lampiran</label>
             <div class="col-sm-4">
               <input type="text" name="nama_tipe_attachment" class="form-control"  value="{{ $tipeattach->nama_tipe_attachment }}">

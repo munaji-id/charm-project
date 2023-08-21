@@ -22,6 +22,7 @@ use App\Http\Controllers\TipeattachmentController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\CrController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\ProjectmodController;
 
 Route::get('/', [AuthController::class, 'index'])->name('login');
 
@@ -50,11 +51,13 @@ Route::group(['middleware'=>'pageuser'], function(){
     Route::get('cr', [CrController::class, 'index'])->name('cr.index')->middleware('pageuser');
     Route::get('cr/create', [CrController::class, 'create'])->name('cr.create')->middleware('pageuser');
     Route::post('cr', [CrController::class, 'store'])->name('cr.store')->middleware('pageuser');
+    Route::match(['put','patch'],'cr/{cr}', [CrController::class, 'update'])->name('cr.update')->middleware('pageuser');
     Route::get('cr/{cr}/edit', [CrController::class, 'edit'])->name('cr.edit')->middleware('pageuser');
     
     Route::match(['put', 'patch'],'cr/status_3/{id}', [CrController::class, 'status_3'])->name('cr.status_3')->middleware('pageuser');
     Route::get('/getModul/{id}', [CrController::class, 'getModul'])->middleware('pageuser');
     Route::post('cr/upload', [CrController::class, 'upload'])->name('cr.upload')->middleware('pageuser');
+    Route::get('cr/{file}/download', [CrController::class, 'download'])->name('cr.download')->middleware('pageuser');
  });
 
 //Route Halaman Admin
@@ -64,10 +67,16 @@ Route::group(['middleware'=>'pagerole'], function(){
     Route::resource('modul', ModulController::class)->middleware('pagerole');
     Route::resource('status', StatusController::class)->middleware('pagerole');
     Route::resource('project', ProjectController::class)->middleware('pagerole');
+    // Route::resource('projectmod', ProjectmodController::class)->middleware('pagerole');
     Route::resource('tipeuser', TipeuserController::class)->middleware('pagerole');    
     Route::resource('tipeattach', TipeattachmentController::class)->middleware('pagerole');
     // Route::resource('cr', CrController::class)->middleware('pagerole');
     // Route::get('/getModul/{id}', [CrController::class, 'getModul'])->middleware('pagerole');
+    // Route::delete('projectmod/{modul_id}/{project_id?}', [ProjectmodController::class, 'destroy'])->name('projectmod.destroy')->middleware('pagerole');
+    Route::delete('projectmod/{modul_id}/', [
+        'as' => 'projectmod.destroy', 
+        'uses' => 'ProjectmodController@destroy'
+    ]);
  });
     // Route::get('users', [UserController::class, 'index'])->name('users');
     // Route::get('users/create', [UserController::class, 'create'])->name('create');

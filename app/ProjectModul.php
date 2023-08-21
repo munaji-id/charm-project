@@ -10,6 +10,12 @@ class ProjectModul extends Model
     // use HasFactory;
     protected $fillable = ['proyek_id', 'modul_id'];
     protected $table = 'project_moduls';
+    protected $primaryKey = ['proyek_id', 'modul_id'];
+
+    public $incrementing = false;
+
+    protected $keyType = 'string';
+
 
     public function project()
     {

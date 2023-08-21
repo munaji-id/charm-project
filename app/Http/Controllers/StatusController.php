@@ -35,12 +35,12 @@ class StatusController extends Controller
     public function store(Request $request)
     {
       $request->validate([
-        'id'                 => 'required',
+        'id'                 => 'required|unique:status,id,except,id',
         'nama_status'        => 'required',
         'deskripsi'          => 'required',
       ]);
       status::create($request->all());
-      return redirect('status');
+      return redirect('status')->with('success','Data berhasil disimpan');
     }
 
     # Menampilkan halaman edit
@@ -55,14 +55,22 @@ class StatusController extends Controller
     # Menyimpan update data
     public function update(Request $request, $id)
     {
+      $request->validate([
+        // 'id'                 => 'required|unique:status,id,except,id',
+        'nama_status'        => 'required',
+        'deskripsi'          => 'required',
+      ]);
       status::find($id)->update($request->all());
-      return redirect('status')->with('success','Status Has Been updated successfully');
+      return redirect('status')->with('success','Data berhasil diupdate');
     }
 
     # Menghapus data
     public function destroy(Status $status)
     {
+      // $status->validate([
+      //   'id'                 => 'required|unique:status,id,except,id',
+      // ]);
         $status->delete();
-        return redirect()->route('status.index')->with('success','Status has been deleted successfully');
+        return redirect()->route('status.index')->with('success','Data berhasil dihapus');
     }
 }

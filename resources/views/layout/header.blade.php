@@ -9,7 +9,7 @@
           <i data-feather="search"></i>
         </div> -->
         <!-- <input type="text" class="form-control" id="navbarForm" placeholder="Search here..."> -->
-        <b>{{ Auth::user()->company->nama_perusahaan}} - {{ Auth::user()->tipeuser->nama_tipe_user}}</b>
+        <b>{{ Auth::user()->tipeuser->nama_tipe_user}} | {{ Auth::user()->company->nama_perusahaan}}</b>
       </div>
     </form>
     <ul class="navbar-nav">

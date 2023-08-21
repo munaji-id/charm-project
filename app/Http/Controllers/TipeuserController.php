@@ -35,33 +35,40 @@ class TipeuserController extends Controller
     public function store(Request $request)
     {
       $request->validate([
-        'nama_tipe_user'     => 'required',
-        'deskripsi'          => 'required',
+        'id'                 => 'required|unique:tipe_users,id,except,id',
+        'nama_tipe_user'     => 'requiredd',
       ]);
-      TipeUser::create($request->all());
-      return redirect('tipeuser');
+      
+        TipeUser::create($request->all());
+        return redirect('tipeuser')->with('success','Data berhasil ditambahkan');
     }
 
     # Menampilkan halaman edit
     public function edit($id)
     {
       $data['title']  = 'Edit Data Tipe Pengguna';
-      $tipeID      = Crypt::decrypt($id);
-      $tipeuser        = TipeUser::find($tipeID);
+      $tipeID         = Crypt::decrypt($id);
+      $tipeuser       = TipeUser::find($tipeID);
       return view('pages.tipeuser.edit', compact('tipeuser'), $data);
     }
 
     # Menyimpan update data
     public function update(Request $request, $id)
     {
+      // error_reporting(0);
+      $request->validate([
+        // 'id'                 => 'required|unique:tipe_users,id,except,id',
+        'nama_tipe_user'     => 'requiredd',
+      ]);
+      
       Tipeuser::find($id)->update($request->all());
-      return redirect('tipeuser')->with('success','Tipe User Has Been updated successfully');
+      return redirect('tipeuser')->with('success','Data berhasil diupdate');
     }
 
     # Menghapus data
     public function destroy(TipeUser $tipeuser)
     {
         $tipeuser->delete();
-        return redirect()->route('tipeuser.index')->with('success','Tipe User has been deleted successfully');
+        return redirect()->route('tipeuser.index')->with('success','Data berhasil dihapus');
     }
 }

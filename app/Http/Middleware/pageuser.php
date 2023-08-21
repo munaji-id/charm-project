@@ -17,11 +17,11 @@ class pageuser
      */
     public function handle(Request $request, Closure $next)
     {
-        if(Auth::check() && ( Auth::user()->tipe_user_id == '1'         // Admin
-                              OR Auth::user()->tipe_user_id == '2'      // Abaper
-                              OR Auth::user()->tipe_user_id == '3'      // Functional
-                              OR Auth::user()->tipe_user_id == '4'      // Basis
-                              OR Auth::user()->tipe_user_id == '5'      // User
+        if(Auth::check() && ( Auth::user()->tipe_user_id == 'ADM'         // Admin
+                              OR Auth::user()->tipe_user_id == 'ABA'      // Abaper
+                              OR Auth::user()->tipe_user_id == 'FUN'      // Functional
+                              OR Auth::user()->tipe_user_id == 'BAS'      // Basis
+                              OR Auth::user()->tipe_user_id == 'USE'      // User
                               )) {
             return $next($request);
           }

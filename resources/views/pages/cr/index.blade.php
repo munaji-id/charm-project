@@ -77,12 +77,12 @@
                 <td>{{$cr->batas_waktu}}</td>                
                 <td>{{$cr->created_at}}</td>                
                 <td>
-                  <a href="/project/{{$cr->id}}" style="padding-right: 8px;" data-bs-toggle="tooltip" data-bs-placement="top" title="Detail"><i class="link-icon" data-feather="info" style="height: 18px; width: 18px;"></i></a>
+                  {{-- <a href="/project/{{$cr->id}}" style="padding-right: 8px;" data-bs-toggle="tooltip" data-bs-placement="top" title="Detail"><i class="link-icon" data-feather="info" style="height: 18px; width: 18px;"></i></a> --}}
                   <a href="{{ route('cr.edit', $cr->id) }}" style="padding-right: 6px;" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit"><i class="link-icon" data-feather="edit" style="height: 18px; width: 18px;"></i></a>
-                  <a href="" class="text-danger" data-bs-toggle="modal" data-bs-target="#exampleModalCenter{{$cr->id}}"><i class="link-icon" data-feather="trash-2" data-bs-toggle="tooltip" data-bs-placement="top" title="Hapus" style="height: 18px; width: 18px"></i></a>
+                  {{-- <a href="" class="text-danger" data-bs-toggle="modal" data-bs-target="#exampleModalCenter{{$cr->id}}"><i class="link-icon" data-feather="trash-2" data-bs-toggle="tooltip" data-bs-placement="top" title="Hapus" style="height: 18px; width: 18px"></i></a> --}}
                 </td>
               </tr>
-              <div class="modal fade" id="exampleModalCenter{{$cr->id}}" tabindex="-1" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+              {{-- <div class="modal fade" id="exampleModalCenter{{$cr->id}}" tabindex="-1" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered">
                   <div class="modal-content">
                     <div class="modal-header">
@@ -93,7 +93,7 @@
                       Apakah Anda yakin akan menghapus Proyek <b>{{$cr->id}} - {{$cr->nama_proyek}}</b> ?
                     </div>
                     <div class="modal-footer">
-                      <form action="{{ route('project.destroy', $cr->id) }}" method="post">
+                      <form action="{{ route('cr.destroy', $cr->id) }}" method="post">
                         @csrf
                         @method('DELETE')
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tidak</button>
@@ -101,7 +101,7 @@
                       </form>
                   </div>
                 </div>
-              </div>
+              </div> --}}
               @endforeach
             </tbody>
           </table>

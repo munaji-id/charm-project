@@ -40,7 +40,7 @@
           <table id="dataTableExample" class="table">
             <thead>
               <tr>
-                <th>ID</th>
+                <th width='30px'>ID</th>
                 <th>Nama Modul</th>
                 <th>Deskripsi</th>
                 <th align="center">Actions</th>

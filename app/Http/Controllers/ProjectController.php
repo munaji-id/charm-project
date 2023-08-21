@@ -28,11 +28,15 @@ class ProjectController extends Controller
     public function create(request $request)
     {
       error_reporting(0);
-      $data['title']  = 'Tambah Data Proyek';
+      if ($request->id == 0) {
+        $data['title']  = 'Tambah Data Proyek';
+      } else {
+        $data['title']  = 'Edit Data Proyek';
+      }
       $companies = Company::pluck('nama_perusahaan', 'id');
       // $selectedCompany = Company::first()->company_id;
-      $id=$request->id;
-      $mst    = Project::where('id', $request->id)->first();
+      $id = $request->id;
+      $mst         = Project::where('id', $request->id)->first();
       $moduls      = Modul::all();
       return view('pages.project.create', compact('companies', 'moduls','mst','id'), $data);
     }
@@ -47,28 +51,28 @@ class ProjectController extends Controller
         'selesai'            => 'required',
       ]);
       $count=count($request->modul_id);
-      if($request->id==0){
+      if($request->id == 0){
         $project = Project::create($request->all());
 
-        for($x=0;$x<$count;$x++){
+        for($x=0; $x<$count; $x++){
           ProjectModul::create(['proyek_id' => $project->id,
-          'modul_id'  => $request->modul_id[$x]]);
+                                'modul_id'  => $request->modul_id[$x]]);
         }
-      }else{
-        $project = Project::where('id',$request->id)->update([
+      } else {
+        $project = Project::where('id', $request->id)->update([
           'nama_proyek'=>$request->nama_proyek,
           'perusahaan_id'=>$request->perusahaan_id,
           'mulai'=>$request->mulai,
           'selesai'=>$request->selesai,
         ]);
-        $delete=ProjectModul::where('proyek_id',$request->id)->delete();
-        for($x=0;$x<$count;$x++){
+        $delete=ProjectModul::where('proyek_id', $request->id)->delete();
+        for($x=0; $x<$count; $x++){
           ProjectModul::create(['proyek_id' => $request->id,
           'modul_id'  => $request->modul_id[$x]]);
         }
       }
     
-      return redirect('project');
+      return redirect('project')->with('success','Data berhasil disimpan');
     }
 
     # Menampilkan halaman edit
@@ -79,11 +83,11 @@ class ProjectController extends Controller
     // }
 
     # Menyimpan update data
-    public function update(Request $request, $id)
-    {
-      Project::find($id)->update($request->all());
-      return redirect('project')->with('success','Project Has Been updated successfully');
-    }
+    // public function update(Request $request, $id)
+    // {
+    //   Project::find($id)->update($request->all());
+    //   return redirect('project')->with('success','Project Has Been updated successfully');
+    // }
 
     # Menampilkan detail data
     public function show(Project $project)
@@ -97,7 +101,8 @@ class ProjectController extends Controller
     # Menghapus data
     public function destroy(Project $project)
     {
-        $project->delete();
-        return redirect()->route('project.index')->with('success','Project has been deleted successfully');
+      $project->delete();
+      return redirect()->route('project.index')->with('success','Project has been deleted successfully');
     }
+
 }
