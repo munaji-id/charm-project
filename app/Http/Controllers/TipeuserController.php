@@ -36,7 +36,7 @@ class TipeuserController extends Controller
     {
       $request->validate([
         'id'                 => 'required|unique:tipe_users,id,except,id',
-        'nama_tipe_user'     => 'requiredd',
+        'nama_tipe_user'     => 'required',
       ]);
       
         TipeUser::create($request->all());

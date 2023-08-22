@@ -16,6 +16,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Haruncpi\LaravelIdGenerator\IdGenerator;
 use App\Notifications\CrNotification;  # Model Notification
+use File;
 
 
 class CrController extends Controller
@@ -146,12 +147,13 @@ class CrController extends Controller
       } elseif ($cr->status_id == 'S3') {
         $data['set_sts']  = 'Ready to Test In DEV';
       } elseif ($cr->status_id == 'S4') {
-        $data['set_sts']  = 'Set Successfully Tested';
+        $data['set_sts']  = 'Set Successfully Testing';
       } elseif ($cr->status_id == 'S5') {
         $data['set_sts']  = 'Ready to Test In QAS';
       } elseif ($cr->status_id == 'S6') {
-        $data['set_sts']  = 'Set Ready to Development';
+        $data['set_sts']  = 'Set Successfully Testing';
       } elseif ($cr->status_id == 'S7') {
+        $data['set_sts']  = 'Set Ready to PROD';
       } 
       $company        = User::find($cr->user_id );
       $status         = Status::all();
@@ -190,9 +192,9 @@ class CrController extends Controller
         'proyek_id'          => 'required',
         'modul_id'           => 'required',
         'tester'             => 'required',
-        'developer'          => 'required',
-        'it_operator'        => 'required',
-        'batas_waktu'        => 'required',
+        // 'developer'          => 'required',
+        // 'it_operator'        => 'required',
+        // 'batas_waktu'        => 'required',
       ]);
 
       Cr::find($id)->update($request->all());
@@ -206,8 +208,11 @@ class CrController extends Controller
       $project        = Project::where('id', $request->proyek_id)->first();
       $status         = Status::where('id', $request->status_id)->first();
       if ($cr->status_id == 'S1') {
-        if ($user_auth->tipe_user_id == 'FUN') { //Tester
-          Cr::where('id', $id)->update(['status_id' => $request->status_id, 'current' => $cr->tester]);
+        if ($user_auth->tipe_user_id == 'FUN' AND $user_auth->id == $cr->tester) { //Tester
+          if ($request->developer == '') {
+            return back()->with('error','Anda belum memilih Developer');
+          }
+          Cr::where('id', $id)->update(['status_id' => $request->status_id, 'current' => $cr->developer]);
           $log = Log::create([
             'cr_id' => $id,
             'log'   => Auth::user()->nama_lengkap. ' - Status sudah di tetapkan menjadi "Ready to Development"'    
@@ -216,42 +221,77 @@ class CrController extends Controller
           return back()->with('error','Anda tidak diperbolehkan merubah ke tahap selanjutnya');
         }
       } elseif ($cr->status_id == 'S2') {
-        if ($user_auth->tipe_user_id == 'FUN') { //Tester
-          if ($request->developer == '') {
-            return back()->with('error','Anda belum memilih Developer');
-          }
-          Cr::where('id', $id)->update(['status_id' => $status->id, 'current' => $user->id]);
+        if ($user_auth->tipe_user_id == 'ABA' AND $user_auth->id == $cr->developer) { //Developer
+          Cr::where('id', $id)->update(['status_id' => $status->id, 'current' => $user->developer]);
           $log = Log::create([
             'cr_id' => $id,
             'log'   => Auth::user()->nama_lengkap. ' - Status sudah di tetapkan menjadi "In Development"'    
           ]);
-          // Notification::send($user, new CrNotification($cr, $user, $project, $status));
+          Notification::send($user, new CrNotification($cr, $user, $project, $status));
 
         } else {
           return back()->with('error','Anda tidak diperbolehkan merubah ke tahap selanjutnya');
         }
       } elseif ($cr->status_id == 'S3') {
-        if ($user_auth->tipe_user_id == 'ABA') { //Developer
-          Cr::where('id', $id)->update(['status_id' => $request->status_id, 'current' => $cr->tester]);        } else {
+        if ($user_auth->tipe_user_id == 'ABA' AND $user_auth->id == $cr->developer) { //Developer
+          Cr::where('id', $id)->update(['status_id' => $request->status_id, 'current' => $cr->tester]);
+          $log = Log::create([
+            'cr_id' => $id,
+            'log'   => Auth::user()->nama_lengkap. ' - Status sudah di tetapkan menjadi "Ready to Testing In DEV"'    
+          ]);
+        } else {
           return back()->with('error','Anda tidak diperbolehkan merubah ke tahap selanjutnya');
         }
       } elseif ($cr->status_id == 'S4') {
-        Cr::where('id', $id)->update(['status_id' => $request->status_id, 'current' => $cr->it_operator]);
+        if ($user_auth->tipe_user_id == 'FUN' AND $user_auth->id == $cr->tester) { //tester
+          Cr::where('id', $id)->update(['status_id' => $request->status_id, 'current' => $cr->it_operator]);
+          $log = Log::create([
+            'cr_id' => $id,
+            'log'   => Auth::user()->nama_lengkap. ' - Status sudah di tetapkan menjadi "Sucessfully Tested In DEV"'    
+          ]);
+        } else {
+          return back()->with('error','Anda tidak diperbolehkan merubah ke tahap selanjutnya');
+        }
+        
       } elseif ($cr->status_id == 'S5') {
-        Cr::where('id', $id)->update(['status_id' => $request->status_id, 'current' => $cr->user_id]); 
+        if ($user_auth->tipe_user_id == 'BAS' AND $user_auth->id == $cr->it_operator) { //Basis
+          Cr::where('id', $id)->update(['status_id' => $request->status_id, 'current' => $cr->user_id]); 
+          $log = Log::create([
+            'cr_id' => $id,
+            'log'   => Auth::user()->nama_lengkap. ' - Status sudah di tetapkan menjadi "Ready to Testing In QA"'    
+          ]);
+        } else {
+          return back()->with('error','Anda tidak diperbolehkan merubah ke tahap selanjutnya');
+        }
       } elseif ($cr->status_id == 'S6') {
-        Cr::where('id', $id)->update(['status_id' => $request->status_id, 'current' => $cr->it_operator]); 
+        if ($user_auth->tipe_user_id == 'USE' AND $user_auth->id == $cr->user_id) { //End User
+          Cr::where('id', $id)->update(['status_id' => $request->status_id, 'current' => $cr->it_operator]); 
+          $log = Log::create([
+            'cr_id' => $id,
+            'log'   => Auth::user()->nama_lengkap. ' - Status sudah di tetapkan menjadi "Sucessfully Tested In QA"'    
+          ]);
+        } else {
+          return back()->with('error','Anda tidak diperbolehkan merubah ke tahap selanjutnya');
+        }
       } elseif ($cr->status_id == 'S7') {
-        Cr::where('id', $id)->update(['status_id' => $request->status_id, 'current' => $cr->user_id]);
+        if ($user_auth->tipe_user_id == 'BAS' AND $user_auth->id == $cr->it_operator) { //Basis
+          Cr::where('id', $id)->update(['status_id' => $request->status_id, 'current' => $cr->user_id]);
+          $log = Log::create([
+            'cr_id' => $id,
+            'log'   => Auth::user()->nama_lengkap. ' - Status sudah di tetapkan menjadi "Impoerted into PROD"'    
+          ]);
+        } else {
+          return back()->with('error','Anda tidak diperbolehkan merubah ke tahap selanjutnya');
+        }
       }
-      return back()->with('success','Permintaan Perubahan Has Been updated successfully');
+      return back()->with('success','Permintaan perubahan berhasil dirubah');
     }
     
     public function upload(Request $request) {
       $attachment = Attachment::create($request->all());
       $file = $request->file('file');
       $path = public_path('');
-
+      
       // if ($request->attachment_id == 1) {
       //   $path = 'documents\functional_spec';
       // } elseif ($request->attachment_id == 2) {
@@ -261,8 +301,12 @@ class CrController extends Controller
       // }
       $file->move($path, $file->getClientOriginalName());
       $attachment->path = $file->getClientOriginalName();
+      $log = Log::create([
+        'cr_id' => $request->cr_id,
+        'log'   => Auth::user()->nama_lengkap.' - Upload File '. $request->attachment_id . $request->nama_file   
+      ]);
       $attachment->save();
-
+      
       // if($request->hasfile('file')) {
       //   $path = $request->file('file')->store('file');
       //   $attachment->path = $path;
@@ -277,5 +321,15 @@ class CrController extends Controller
     	$fileName = time().'.docx';
 
       return response()->download($filePath, $file, $headers);
+    }
+
+    public function destroy_attachment($id) {
+      $attachment = Attachment::where('id', $id)->first();
+	    File::delete(''. $attachment->path);
+ 
+	    // hapus data
+	    Attachment::where('id', $id)->delete();
+ 
+	    return redirect()->back();
     }
 }

@@ -58,6 +58,7 @@ Route::group(['middleware'=>'pageuser'], function(){
     Route::get('/getModul/{id}', [CrController::class, 'getModul'])->middleware('pageuser');
     Route::post('cr/upload', [CrController::class, 'upload'])->name('cr.upload')->middleware('pageuser');
     Route::get('cr/{file}/download', [CrController::class, 'download'])->name('cr.download')->middleware('pageuser');
+    Route::get('cr/destroy_attachment/{id}', [CrController::class, 'destroy_attachment'])->name('cr.destroy_attachment')->middleware('pageuser');
  });
 
 //Route Halaman Admin

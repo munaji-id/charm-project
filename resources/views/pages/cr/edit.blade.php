@@ -16,6 +16,7 @@
     @csrf
     @method('PUT')
   <div class="d-flex align-items-center flex-wrap text-nowrap">
+    @if ($cr->status_id <> 'S8')
     <button type="submit" class="btn btn-primary btn-icon-text me-2 mb-2 mb-md-0" name="sumbit" id="submit">Simpan</button>
     <div class="dropdown">
       <button class="btn btn-secondary dropdown-toggle me-2 mb-2 mb-md-0" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -27,17 +28,25 @@
           <a class="dropdown-item" href="">Reject</a>
         @elseif ($cr->status_id == 'S2')
         <a class="dropdown-item" href="" class="text-danger" data-bs-toggle="modal" data-bs-target="#exampleModalCenter{{$cr->id}}">@yield('set_sts', $set_sts)</a>                    
-          <a class="dropdown-item" href="">Reject</a>                    
         @elseif ($cr->status_id == 'S3')
-          <a class="dropdown-item" href="">Reset Status Into Ready Development</a>  
+          {{-- <a class="dropdown-item" href="">Ready to Test in DEV</a>   --}}
           <a class="dropdown-item" href="" class="text-danger" data-bs-toggle="modal" data-bs-target="#exampleModalCenter{{$cr->id}}">@yield('set_sts', $set_sts)</a>
         @elseif ($cr->status_id == 'S4')
+        <a class="dropdown-item" href="" class="text-danger" data-bs-toggle="modal" data-bs-target="#exampleModalCenter{{$cr->id}}">@yield('set_sts', $set_sts)</a>    
           <a class="dropdown-item" href="" class="text-danger" data-bs-toggle="modal" data-bs-target="#exampleModalCenter{{$cr->id}}">Reset Status Into Development</a>                    
-        @elseif ($cr->status_id == 'S5')                    
+        @elseif ($cr->status_id == 'S5') 
+        <a class="dropdown-item" href="" class="text-danger" data-bs-toggle="modal" data-bs-target="#exampleModalCenter{{$cr->id}}">@yield('set_sts', $set_sts)</a>                   
+        @elseif ($cr->status_id == 'S6')
+        <a class="dropdown-item" href="" class="text-danger" data-bs-toggle="modal" data-bs-target="#exampleModalCenter{{$cr->id}}">@yield('set_sts', $set_sts)</a>    
+        <a class="dropdown-item" href="" class="text-danger" data-bs-toggle="modal" data-bs-target="#exampleModalCenter{{$cr->id}}">Reset Status Into Development</a>                    
+        @elseif ($cr->status_id == 'S7')
+        <a class="dropdown-item" href="" class="text-danger" data-bs-toggle="modal" data-bs-target="#exampleModalCenter{{$cr->id}}">@yield('set_sts', $set_sts)</a>   
         @endif        
         
       </div>
     </div>
+    @endif
+    
     <button type="button" class="btn btn-secondary btn-icon-text me-2 mb-2 mb-md-0" onclick="history.back()">
       <i class="btn-icon-prepend" data-feather="arrow-left"></i>
       Kembali
@@ -124,7 +133,7 @@
               </select>
             </div>
           </div>
-          @if(Auth::user()->tipe_user_id <> '5')
+          @if(Auth::user()->tipe_user_id <> 'USE')
           <div class="row mb-3">
             <label class="col-sm-3 col-form-label">Developer</label>
             <div class="col-sm-4">
@@ -176,17 +185,20 @@
   </div>
 </div>
 {{-- Attachments --}}
+@if(Auth::user()->tipe_user_id <> 'USE')
 <div class="row">
   <div class="col-md-12 grid-margin stretch-card">
     <div class="card">
       <div class="card-body">
         <h6 class="card-title">Lampiran</h6>
+        @if ($cr->status_id <> 'S8')
         <div class="d-flex align-items-center flex-wrap text-nowrap">
           <button type="button" class="btn btn-primary btn-xs mb-1 mb-md-0" data-bs-toggle="modal" data-bs-target="#varyingModal" data-bs-whatever="@fat">
             <i class="btn-icon-prepend" data-feather="clip"></i>
             Lampiran
           </button>
         </div>
+        @endif
         <br>
         <div id="" class="overflow-auto border" style="max-width: auto; max-height: 250px;">
           <div class="table-responsive">
@@ -210,7 +222,12 @@
                   <td>{{$attachment->tipeattacment->nama_tipe_attachment}}</td>
                   <td>{{$attachment->nama_file}}</td>
                   <td>{{$attachment->path}}</td>
-                  <td><a href="{{ route('cr.download', $attachment->path ) }}">Download</a></td>
+                  <td>
+                    <a href="{{ route('cr.download', $attachment->path) }}" style="padding-right: 6px;" data-bs-toggle="tooltip" data-bs-placement="top" title="Download"><i class="link-icon" data-feather="download" style="height: 18px; width: 18px;"></i></a>
+                    @if ($cr->status_id <> 'S8')
+                    <a href="{{ route('cr.destroy_attachment', $attachment->id) }}" style="padding-right: 6px; color:red" data-bs-toggle="tooltip" data-bs-placement="top" title="Hapus"><i class="link-icon" data-feather="edit"></i>Hapus</a>
+                    @endif
+                    {{-- <a href="{{ route('cr.download', $attachment->path ) }}">Download</a> <a href="{{ route('cr.download', $attachment->path ) }}">Hapus</a> --}}</td>
                 </tr>
                 @endforeach
                 @if ($attachments->count() == 0)
@@ -225,6 +242,7 @@
     </div>
   </div>
 </div>
+@endif
 {{-- End Attachments --}}
 {{-- Logs --}}
 <div class="row">
@@ -261,9 +279,9 @@
         @elseif ($cr->status_id == 'S2')
           Apakah Anda yakin akan merubah status ke <b>In Development ?</b>
         @elseif ($cr->status_id == 'S3')
-          Apakah Anda yakin akan merubah status ke <b>Ready to Testing ?</b>
+          Apakah Anda yakin akan merubah status ke <b>Ready to Test in DEV ?</b>
         @elseif ($cr->status_id == 'S4')
-          Apakah Anda yakin akan merubah status ke <b>Successfully Tested DEV ?</b>
+          Apakah Anda yakin akan merubah status ke <b>Successfully Testing in DEV ?</b>
         @elseif ($cr->status_id == 'S5')
           Apakah Anda yakin akan merubah status ke <b>Ready to Testing ?</b>
         @elseif ($cr->status_id == 'S6')
@@ -277,7 +295,7 @@
         <form action="{{ route('cr.status_3',$cr->id) }}" method="post">
           @csrf
           @method('PUT')
-          <input type="text" name="status_id" @if ($cr->status_id == 'S1')
+          <input type="hidden" name="status_id" @if ($cr->status_id == 'S1')
                                                        value="S2"
                                                        @elseif ($cr->status_id == 'S2')
                                                        value="S3"
@@ -293,8 +311,8 @@
                                                        value="S8"
                                                        @endif
           >
-          <input type="text" name="developer" value="{{ $cr->developer }}">
-          <input type="text" name="proyek_id" value="{{ $cr->proyek_id }}">
+          <input type="hidden" name="developer" value="{{ $cr->developer }}">
+          <input type="hidden" name="proyek_id" value="{{ $cr->proyek_id }}">
           <button type="submit" class="btn btn-danger">Ya</button>
         </form>
       </div>

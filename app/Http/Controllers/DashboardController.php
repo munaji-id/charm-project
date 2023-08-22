@@ -15,7 +15,7 @@ class DashboardController extends Controller
       $data['title']  = 'Dashboard';
       // $crs = (new CrController)->index();
       $user = Auth::user();
-      if ($user->perusahaan_id == 1) {
+      if ($user->perusahaan_id == 'KIT') {
         $crs  = Cr::select('change_requests.id',
                      'change_requests.judul',
                      'projects.perusahaan_id',
