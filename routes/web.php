@@ -47,6 +47,7 @@ Route::get('logout', [AuthController::class, 'logout'])->name('logout');
 //Route Halaman All User
 Route::group(['middleware'=>'pageuser'], function(){
     Route::resource('dashboard', DashboardController::class)->middleware('pageuser');
+    Route::match(['put','patch'],'user/{id}', [UserController::class, 'change_password'])->name('user.change_password')->middleware('pageuser');
     // Route::resource('cr', CrController::class)->middleware('pageuser');
     Route::get('cr', [CrController::class, 'index'])->name('cr.index')->middleware('pageuser');
     Route::get('cr/create', [CrController::class, 'create'])->name('cr.create')->middleware('pageuser');
@@ -59,7 +60,10 @@ Route::group(['middleware'=>'pageuser'], function(){
     Route::post('cr/upload', [CrController::class, 'upload'])->name('cr.upload')->middleware('pageuser');
     Route::get('cr/{file}/download', [CrController::class, 'download'])->name('cr.download')->middleware('pageuser');
     Route::get('cr/destroy_attachment/{id}', [CrController::class, 'destroy_attachment'])->name('cr.destroy_attachment')->middleware('pageuser');
- });
+    
+    Route::resource('fs', FsController::class)->middleware('pageuser');
+
+});
 
 //Route Halaman Admin
 Route::group(['middleware'=>'pagerole'], function(){

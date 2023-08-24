@@ -138,20 +138,18 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="btn-close"></button>
       </div>
       <div class="modal-body">
-        <form action="" method="POST" enctype="multipart/form-data">
+        <form action="{{ route('user.change_password',$user->id) }}" method="POST" enctype="multipart/form-data">
           @csrf
+          @method('PUT')
           {{-- <input class="form-control" type="text" name="cr_id" value="{{ $cr->id}}"> --}}
-          <div class="mb-3">
-            <label for="recipient-name" class="form-label">Password Lama:</label>
-            <input type="password" name="password" class="form-control" >
-          </div>
+          <input type="hidden" name="id" class="form-control" value="{{$user->id}}">
           <div class="mb-3">
             <label for="recipient-name" class="form-label">Password Baru:</label>
-            <input type="password" name="password" class="form-control" >
+            <input type="password_n" name="password_n" class="form-control" >
           </div>
           <div class="mb-3">
             <label for="message-text" class="form-label">Masukkan Ulang Password Baru:</label>
-            <input type="password" name="password"  class="form-control" >
+            <input type="password_r" name="password_r"  class="form-control" >
           </div>        
       </div>
       <div class="modal-footer">

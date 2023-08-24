@@ -112,7 +112,15 @@ class UserController extends Controller
     public function update(Request $request, $id)
     {
       User::find($id)->update($request->all());
-      return redirect('user')->with('success','User Has Been updated successfully');
+      return redirect('user')->with('success','Data berhasil dirubah');
+    }
+
+    public function change_password(Request $request, $id) {
+        
+        User::where('id', $id)->update([
+            'id' => $request->id,
+            'password' => Hash::make($request->password_n)]);
+        return back()->with('success', 'Password berhasil dirubah');
     }
 
     public function logout(Request $request)
