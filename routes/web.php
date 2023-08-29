@@ -43,12 +43,17 @@ Route::get('logout', [AuthController::class, 'logout'])->name('logout');
 //     Route::get('users', [UserController::class, 'index'])->name('users');
 //     Route::get('users/create', [UserController::class, 'create'])->name('create');
 // });
+// Route::resource('user', UserController::class);
 
 //Route Halaman All User
 Route::group(['middleware'=>'pageuser'], function(){
     Route::resource('dashboard', DashboardController::class)->middleware('pageuser');
     Route::match(['put','patch'],'user/{id}', [UserController::class, 'change_password'])->name('user.change_password')->middleware('pageuser');
-    // Route::resource('cr', CrController::class)->middleware('pageuser');
+    Route::resource('user', UserController::class)->middleware('pageuser');
+
+    // Route::match(['put','patch'],'user/{user}', [UserController::class, 'update'])->name('user.update')->middleware('pageuser');
+    // Route::get('user/{user}', [UserController::class, 'show'])->name('user.show')->middleware('pageuser');
+    // Route::get('user/{user}/edit', [UserController::class, 'edit'])->name('user.edit')->middleware('pageuser');
     Route::get('cr', [CrController::class, 'index'])->name('cr.index')->middleware('pageuser');
     Route::get('cr/create', [CrController::class, 'create'])->name('cr.create')->middleware('pageuser');
     Route::post('cr', [CrController::class, 'store'])->name('cr.store')->middleware('pageuser');
@@ -56,6 +61,7 @@ Route::group(['middleware'=>'pageuser'], function(){
     Route::get('cr/{cr}/edit', [CrController::class, 'edit'])->name('cr.edit')->middleware('pageuser');
     
     Route::match(['put', 'patch'],'cr/status_3/{id}', [CrController::class, 'status_3'])->name('cr.status_3')->middleware('pageuser');
+    Route::match(['put', 'patch'],'cr/status_1/{id}', [CrController::class, 'status_1'])->name('cr.status_1')->middleware('pageuser');
     Route::get('/getModul/{id}', [CrController::class, 'getModul'])->middleware('pageuser');
     Route::post('cr/upload', [CrController::class, 'upload'])->name('cr.upload')->middleware('pageuser');
     Route::get('cr/{file}/download', [CrController::class, 'download'])->name('cr.download')->middleware('pageuser');
@@ -67,7 +73,11 @@ Route::group(['middleware'=>'pageuser'], function(){
 
 //Route Halaman Admin
 Route::group(['middleware'=>'pagerole'], function(){
-    Route::resource('user', UserController::class)->middleware('pagerole');
+    // Route::resource('user', UserController::class)->middleware('pagerole');
+    // Route::get('user', [UserController::class, 'index'])->name('user.index')->middleware('pagerole');
+    // Route::get('user/create', [UserController::class, 'create'])->name('user.create')->middleware('pagerole');
+    // Route::post('user', [UserController::class, 'store'])->name('user.store')->middleware('pagerole');
+    // Route::delete('user/{user}', [UserController::class, 'destroy'])->name('user.destroy')->middleware('pagerole');
     Route::resource('company', CompanyController::class)->middleware('pagerole');
     Route::resource('modul', ModulController::class)->middleware('pagerole');
     Route::resource('status', StatusController::class)->middleware('pagerole');

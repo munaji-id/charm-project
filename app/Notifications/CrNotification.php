@@ -48,7 +48,7 @@ class CrNotification extends Notification
     {
         if ($this->cr->status_id == 'S1') {
             return (new MailMessage)
-                ->subject("{$this->cr['id']} : {$this->cr['judul']}")
+                ->subject("{$this->status['nama_status']} - {$this->cr['id']} : {$this->cr['judul']}")
                 ->greeting("Hi,  {$this->user['nama_lengkap']}")
                 ->line('Permintaan Perubahan di tugaskan kepada Anda,')
                 ->line('Dengan detail sebagai berikut,')
@@ -61,9 +61,9 @@ class CrNotification extends Notification
                 ->line('Untuk masuk ke Aplikasi Change Request Management')
                 ->action('Login Disini', url('/cr'))
                 ->line('Thank you for using our application!');
-        } elseif ($this->cr->status_id == 'S3') {
+        } else { #($this->cr->status_id == 'S3') {
             return (new MailMessage)
-                ->subject("{$this->cr['id']} : {$this->cr['judul']}")
+                ->subject("{$this->status['nama_status']} - {$this->cr['id']} : {$this->cr['judul']}")
                 ->greeting("Hi,  {$this->user['nama_lengkap']}")
                 ->line('Permintaan Perubahan di tugaskan kepada Anda,')
                 ->line('Dengan detail sebagai berikut,')

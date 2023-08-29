@@ -26,6 +26,6 @@ class pageuser
             return $next($request);
           }
         // return redirect ('dashboard')->with('error_pagerole','You are not authorize for this page!');
-        return back()->with('error_pagerole','Anda tidak dizinkan untuk membuka halaman tersebut!');
+        return back()->with('error_pagerole','Anda tidak dizinkan untuk membuka halaman tersebut...!');
     }
 }

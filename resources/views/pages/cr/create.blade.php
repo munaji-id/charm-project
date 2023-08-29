@@ -96,7 +96,7 @@
             </div>
           </div>
           <div class="row mb-3">
-            <label class="col-sm-3 col-form-label">Tester</label>
+            <label class="col-sm-3 col-form-label">Functional</label>
             <div class="col-sm-4">
               <select class="form-control" name="tester">
                 <option value="">-- Pilih Tester --</option>
@@ -109,7 +109,7 @@
           </div>
           @if(Auth::user()->tipe_user_id <> 'USE')
           <div class="row mb-3">
-            <label class="col-sm-3 col-form-label">Developer</label>
+            <label class="col-sm-3 col-form-label">Abaper</label>
             <div class="col-sm-4">
               <select class="form-control" name="developer">
                 <option value="">-- Pilih Developer --</option>
@@ -121,7 +121,7 @@
             </div>
           </div>
           <div class="row mb-3">
-            <label class="col-sm-3 col-form-label">IT Operator</label>
+            <label class="col-sm-3 col-form-label">Basis</label>
             <div class="col-sm-4">
               <select class="form-control" name="it_operator">
                 <option value="">-- Pilih Developer --</option>

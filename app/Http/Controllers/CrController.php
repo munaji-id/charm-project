@@ -16,6 +16,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Haruncpi\LaravelIdGenerator\IdGenerator;
 use App\Notifications\CrNotification;  # Model Notification
+use App\Notifications\CrNotification1;  # Model Notification
 use File;
 
 
@@ -72,7 +73,7 @@ class CrController extends Controller
     public function create(request $request)
     {
       error_reporting(0);
-      $status         = Status::all();
+      $status         = Status::where('id', 'like', 'S%' )->get(); #all();
       $user           = Auth::user();
       $data['title']  = 'Tambah Permintaan Perubahan';
       $projects       = Project::where('perusahaan_id', $user->perusahaan_id)->pluck('nama_proyek', 'id');
@@ -204,10 +205,11 @@ class CrController extends Controller
     public function status_3(Request $request, $id) {
       $user_auth      = Auth::user();
       $cr             = Cr::where('id', $id)->first();
-      $user           = User::where('id', $request->developer)->first();
+      
       $project        = Project::where('id', $request->proyek_id)->first();
       $status         = Status::where('id', $request->status_id)->first();
       if ($cr->status_id == 'S1') {
+        $user           = User::where('id', $request->developer)->first();
         if ($user_auth->tipe_user_id == 'FUN' AND $user_auth->id == $cr->tester) { //Tester
           if ($request->developer == '') {
             return back()->with('error','Anda belum memilih Developer');
@@ -217,69 +219,116 @@ class CrController extends Controller
             'cr_id' => $id,
             'log'   => Auth::user()->nama_lengkap. ' - Status sudah di tetapkan menjadi "Ready to Development"'    
           ]);
+          Notification::send($user, new CrNotification($cr, $user, $project, $status));
         } else {
           return back()->with('error','Anda tidak diperbolehkan merubah ke tahap selanjutnya');
         }
       } elseif ($cr->status_id == 'S2') {
+        $user           = User::where('id', $request->developer)->first();
         if ($user_auth->tipe_user_id == 'ABA' AND $user_auth->id == $cr->developer) { //Developer
-          Cr::where('id', $id)->update(['status_id' => $status->id, 'current' => $user->developer]);
+          Cr::where('id', $id)->update(['status_id' => $status->id, 'current' => $cr->developer]);
           $log = Log::create([
             'cr_id' => $id,
             'log'   => Auth::user()->nama_lengkap. ' - Status sudah di tetapkan menjadi "In Development"'    
           ]);
-          Notification::send($user, new CrNotification($cr, $user, $project, $status));
-
         } else {
           return back()->with('error','Anda tidak diperbolehkan merubah ke tahap selanjutnya');
         }
       } elseif ($cr->status_id == 'S3') {
+        $user           = User::where('id', $request->tester)->first();
         if ($user_auth->tipe_user_id == 'ABA' AND $user_auth->id == $cr->developer) { //Developer
           Cr::where('id', $id)->update(['status_id' => $request->status_id, 'current' => $cr->tester]);
           $log = Log::create([
             'cr_id' => $id,
-            'log'   => Auth::user()->nama_lengkap. ' - Status sudah di tetapkan menjadi "Ready to Testing In DEV"'    
+            'log'   => Auth::user()->nama_lengkap. ' - Status sudah di tetapkan menjadi "Ready to Testing In DEV"' 
           ]);
+          Notification::route('mail', $user->email)->notify(new CrNotification($cr, $user, $project, $status));
         } else {
           return back()->with('error','Anda tidak diperbolehkan merubah ke tahap selanjutnya');
         }
       } elseif ($cr->status_id == 'S4') {
+        $user           = User::where('id', $request->it_operator)->first();
         if ($user_auth->tipe_user_id == 'FUN' AND $user_auth->id == $cr->tester) { //tester
           Cr::where('id', $id)->update(['status_id' => $request->status_id, 'current' => $cr->it_operator]);
           $log = Log::create([
             'cr_id' => $id,
             'log'   => Auth::user()->nama_lengkap. ' - Status sudah di tetapkan menjadi "Sucessfully Tested In DEV"'    
           ]);
+          Notification::route('mail', $user->email)->notify(new CrNotification($cr, $user, $project, $status));
         } else {
           return back()->with('error','Anda tidak diperbolehkan merubah ke tahap selanjutnya');
         }
         
       } elseif ($cr->status_id == 'S5') {
+        $user           = User::where('id', $request->user_id)->first();
         if ($user_auth->tipe_user_id == 'BAS' AND $user_auth->id == $cr->it_operator) { //Basis
           Cr::where('id', $id)->update(['status_id' => $request->status_id, 'current' => $cr->user_id]); 
           $log = Log::create([
             'cr_id' => $id,
             'log'   => Auth::user()->nama_lengkap. ' - Status sudah di tetapkan menjadi "Ready to Testing In QA"'    
           ]);
+          Notification::route('mail', $user->email)->notify(new CrNotification($cr, $user, $project, $status));
         } else {
           return back()->with('error','Anda tidak diperbolehkan merubah ke tahap selanjutnya');
         }
       } elseif ($cr->status_id == 'S6') {
+        $user           = User::where('id', $request->it_operator)->first();
         if ($user_auth->tipe_user_id == 'USE' AND $user_auth->id == $cr->user_id) { //End User
           Cr::where('id', $id)->update(['status_id' => $request->status_id, 'current' => $cr->it_operator]); 
           $log = Log::create([
             'cr_id' => $id,
             'log'   => Auth::user()->nama_lengkap. ' - Status sudah di tetapkan menjadi "Sucessfully Tested In QA"'    
           ]);
+          Notification::route('mail', $user->email)->notify(new CrNotification($cr, $user, $project, $status));
         } else {
           return back()->with('error','Anda tidak diperbolehkan merubah ke tahap selanjutnya');
         }
       } elseif ($cr->status_id == 'S7') {
+        $user           = User::where('id', $request->user_id)->first();
         if ($user_auth->tipe_user_id == 'BAS' AND $user_auth->id == $cr->it_operator) { //Basis
           Cr::where('id', $id)->update(['status_id' => $request->status_id, 'current' => $cr->user_id]);
           $log = Log::create([
             'cr_id' => $id,
             'log'   => Auth::user()->nama_lengkap. ' - Status sudah di tetapkan menjadi "Impoerted into PROD"'    
           ]);
+          Notification::route('mail', $user->email)->notify(new CrNotification($cr, $user, $project, $status));
+        } else {
+          return back()->with('error','Anda tidak diperbolehkan merubah ke tahap selanjutnya');
+        }
+      }
+      return back()->with('success','Permintaan perubahan berhasil dirubah');
+    }
+
+    public function status_1(Request $request, $id) {
+      $user_auth      = Auth::user();
+      $cr             = Cr::where('id', $id)->first();
+      
+      $project        = Project::where('id', $request->proyek_id)->first();
+      $status         = Status::where('id', $request->status_id)->first();
+      if ($cr->status_id == 'S4') {
+        $user           = User::where('id', $request->developer)->first();
+        if ($user_auth->tipe_user_id == 'FUN' AND $user_auth->id == $cr->tester) { //Tester
+          if ($request->developer == '') {
+            return back()->with('error','Anda belum memilih Abaper / Developer');
+          }
+          Cr::where('id', $id)->update(['status_id' => $request->status_id, 'current' => $cr->developer]);
+          $log = Log::create([
+            'cr_id' => $id,
+            'log'   => Auth::user()->nama_lengkap. ' - Status di kembalikan ke "In to Development"'    
+          ]);
+          Notification::send($user, new CrNotification1($cr, $user, $project, $status));
+        } else {
+          return back()->with('error','Anda tidak diperbolehkan merubah ke tahap selanjutnya');
+        }
+      } elseif ($cr->status_id == 'S6') {
+        $user           = User::where('id', $request->developer)->first();
+        if ($user_auth->tipe_user_id == 'USE' AND $user_auth->id == $cr->user_id) { //End User
+          Cr::where('id', $id)->update(['status_id' => $status->id, 'current' => $cr->developer]);
+          $log = Log::create([
+            'cr_id' => $id,
+            'log'   => Auth::user()->nama_lengkap. ' - Status di kembalikan ke "In to Development"'    
+          ]);
+          Notification::route('mail', $user->email)->notify(new CrNotification1($cr, $user, $project, $status));
         } else {
           return back()->with('error','Anda tidak diperbolehkan merubah ke tahap selanjutnya');
         }

@@ -25,20 +25,20 @@
       <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
         @if ($cr->status_id == 'S1')
         <a class="dropdown-item" href="" class="text-danger" data-bs-toggle="modal" data-bs-target="#exampleModalCenter{{$cr->id}}">@yield('set_sts', $set_sts)</a>
-          <a class="dropdown-item" href="">Reject</a>
         @elseif ($cr->status_id == 'S2')
         <a class="dropdown-item" href="" class="text-danger" data-bs-toggle="modal" data-bs-target="#exampleModalCenter{{$cr->id}}">@yield('set_sts', $set_sts)</a>                    
         @elseif ($cr->status_id == 'S3')
           {{-- <a class="dropdown-item" href="">Ready to Test in DEV</a>   --}}
           <a class="dropdown-item" href="" class="text-danger" data-bs-toggle="modal" data-bs-target="#exampleModalCenter{{$cr->id}}">@yield('set_sts', $set_sts)</a>
-        @elseif ($cr->status_id == 'S4')
+
+          @elseif ($cr->status_id == 'S4')
         <a class="dropdown-item" href="" class="text-danger" data-bs-toggle="modal" data-bs-target="#exampleModalCenter{{$cr->id}}">@yield('set_sts', $set_sts)</a>    
-          <a class="dropdown-item" href="" class="text-danger" data-bs-toggle="modal" data-bs-target="#exampleModalCenter{{$cr->id}}">Reset Status Into Development</a>                    
+        <a class="dropdown-item" href="" class="text-danger" data-bs-toggle="modal" data-bs-target="#exampleModalCenterb{{$cr->id}}">Reset Status Into Development</a>                    
         @elseif ($cr->status_id == 'S5') 
         <a class="dropdown-item" href="" class="text-danger" data-bs-toggle="modal" data-bs-target="#exampleModalCenter{{$cr->id}}">@yield('set_sts', $set_sts)</a>                   
         @elseif ($cr->status_id == 'S6')
         <a class="dropdown-item" href="" class="text-danger" data-bs-toggle="modal" data-bs-target="#exampleModalCenter{{$cr->id}}">@yield('set_sts', $set_sts)</a>    
-        <a class="dropdown-item" href="" class="text-danger" data-bs-toggle="modal" data-bs-target="#exampleModalCenter{{$cr->id}}">Reset Status Into Development</a>                    
+        <a class="dropdown-item" href="" class="text-danger" data-bs-toggle="modal" data-bs-target="#exampleModalCenterb{{$cr->id}}">Reset Status Into Development</a>                    
         @elseif ($cr->status_id == 'S7')
         <a class="dropdown-item" href="" class="text-danger" data-bs-toggle="modal" data-bs-target="#exampleModalCenter{{$cr->id}}">@yield('set_sts', $set_sts)</a>   
         @endif        
@@ -122,7 +122,7 @@
             </div>
           </div>
           <div class="row mb-3">
-            <label class="col-sm-3 col-form-label">Tester</label>
+            <label class="col-sm-3 col-form-label">Functional</label>
             <div class="col-sm-4">
               <select class="form-control" name="tester">
                 <option value="">-- Pilih Tester --</option>
@@ -135,7 +135,7 @@
           </div>
           @if(Auth::user()->tipe_user_id <> 'USE')
           <div class="row mb-3">
-            <label class="col-sm-3 col-form-label">Developer</label>
+            <label class="col-sm-3 col-form-label">Abaper</label>
             <div class="col-sm-4">
               <select class="form-control" name="developer">
                 <option value="">-- Pilih Developer --</option>
@@ -147,7 +147,7 @@
             </div>
           </div>
           <div class="row mb-3">
-            <label class="col-sm-3 col-form-label">IT Operator</label>
+            <label class="col-sm-3 col-form-label">Basis</label>
             <div class="col-sm-4">
               <select class="form-control" name="it_operator">
                 <option value="">-- Pilih IT Operator --</option>
@@ -162,7 +162,7 @@
             <label class="col-sm-3 col-form-label">Batas Waktu</label>
             <div class="col-sm-2">
               <div class="input-group date datepicker" id="datePickerStart">
-                <input type="text" class="form-control" name="batas_waktu">
+                <input type="text" class="form-control" name="batas_waktu" value=" {{ $cr->batas_waktu }}">
                 <span class="input-group-text input-group-addon"><i data-feather="calendar"></i></span>
               </div>
             </div>
@@ -223,7 +223,7 @@
                   <td>{{$attachment->nama_file}}</td>
                   <td>{{$attachment->path}}</td>
                   <td>
-                    <a href="{{ route('cr.download', $attachment->path) }}" style="padding-right: 6px;" data-bs-toggle="tooltip" data-bs-placement="top" title="Download"><i class="link-icon" data-feather="download" style="height: 18px; width: 18px;"></i></a>
+                    <a href="{{ route('cr.download', $attachment->path) }}" style="padding-right: 6px;" data-bs-toggle="tooltip" data-bs-placement="top" title="Download"><i class="link-icon" data-feather="download" style="height: 18px; width: 18px;"></i>Download</a>
                     @if ($cr->status_id <> 'S8')
                     <a href="{{ route('cr.destroy_attachment', $attachment->id) }}" style="padding-right: 6px; color:red" data-bs-toggle="tooltip" data-bs-placement="top" title="Hapus"><i class="link-icon" data-feather="edit"></i>Hapus</a>
                     @endif
@@ -312,6 +312,38 @@
                                                        @endif
           >
           <input type="hidden" name="developer" value="{{ $cr->developer }}">
+          <input type="hidden" name="tester" value="{{ $cr->tester }}">
+          <input type="hidden" name="it_operator" value="{{ $cr->it_operator }}">
+          <input type="hidden" name="user_id" value="{{ $cr->user_id }}">
+          <input type="hidden" name="proyek_id" value="{{ $cr->proyek_id }}">
+          <button type="submit" class="btn btn-danger">Ya</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="exampleModalCenterb{{$cr->id}}" tabindex="-1" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalCenterTitle">Konfirmasi</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="btn-close"></button>
+      </div>
+      <div class="modal-body">
+        @if ($cr->status_id == 'S4' OR $cr->status_id == 'S6')
+          Apakah Anda yakin akan mengembalikan status ke <b>In Development ?</b>
+        @endif        
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tidak</button>
+        <form action="{{ route('cr.status_1',$cr->id) }}" method="post">
+          @csrf
+          @method('PUT')
+          <input type="hidden" name="status_id" value="S3">
+          <input type="hidden" name="developer" value="{{ $cr->developer }}">
+          <input type="hidden" name="tester" value="{{ $cr->tester }}">
+          <input type="hidden" name="it_operator" value="{{ $cr->it_operator }}">
+          <input type="hidden" name="user_id" value="{{ $cr->user_id }}">
           <input type="hidden" name="proyek_id" value="{{ $cr->proyek_id }}">
           <button type="submit" class="btn btn-danger">Ya</button>
         </form>

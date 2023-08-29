@@ -58,7 +58,7 @@ class TipeuserController extends Controller
       // error_reporting(0);
       $request->validate([
         // 'id'                 => 'required|unique:tipe_users,id,except,id',
-        'nama_tipe_user'     => 'requiredd',
+        'nama_tipe_user'     => 'required',
       ]);
       
       Tipeuser::find($id)->update($request->all());
