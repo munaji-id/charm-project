@@ -18,6 +18,7 @@ use Haruncpi\LaravelIdGenerator\IdGenerator;
 use App\Notifications\CrNotification;  # Model Notification
 use App\Notifications\CrNotification1;  # Model Notification
 use File;
+use DB;
 
 
 class CrController extends Controller
@@ -205,14 +206,21 @@ class CrController extends Controller
     public function status_3(Request $request, $id) {
       $user_auth      = Auth::user();
       $cr             = Cr::where('id', $id)->first();
-      
+      $attachment     = Attachment::where('cr_id', $id)->first();
       $project        = Project::where('id', $request->proyek_id)->first();
       $status         = Status::where('id', $request->status_id)->first();
+      $count = DB::table('attachments')->
+      where('cr_id', $cr)->
+      selectRaw('count(cr_id) as cnt')->pluck('cnt');
+
       if ($cr->status_id == 'S1') {
         $user           = User::where('id', $request->developer)->first();
         if ($user_auth->tipe_user_id == 'FUN' AND $user_auth->id == $cr->tester) { //Tester
           if ($request->developer == '') {
             return back()->with('error','Anda belum memilih Developer');
+          }
+          if (DB::table('attachments')->where('cr_id', $cr->id)->where('attachment_id', 'FS')->doesntExist()) {
+            return back()->with('error','Silahkan upload dokumen FS terlebih dahulu');
           }
           Cr::where('id', $id)->update(['status_id' => $request->status_id, 'current' => $cr->developer]);
           $log = Log::create([
