@@ -99,7 +99,7 @@
             <label class="col-sm-3 col-form-label">Functional</label>
             <div class="col-sm-4">
               <select class="form-control" name="tester">
-                <option value="">-- Pilih Tester --</option>
+                <option value="">-- Pilih Functional --</option>
                 @foreach ($testers as $id => $tester)   
                   <option value="{{ $id }}" @if ($mst->user_id == $id) selected                    
                   @endif>{{ $tester }}</option>
@@ -112,7 +112,7 @@
             <label class="col-sm-3 col-form-label">Abaper</label>
             <div class="col-sm-4">
               <select class="form-control" name="developer">
-                <option value="">-- Pilih Developer --</option>
+                <option value="">-- Pilih Abaper --</option>
                 @foreach ($developers as $id => $developer)   
                   <option value="{{ $id }}" @if ($mst->user_id == $id) selected                    
                   @endif>{{ $developer }}</option>
@@ -124,7 +124,7 @@
             <label class="col-sm-3 col-form-label">Basis</label>
             <div class="col-sm-4">
               <select class="form-control" name="it_operator">
-                <option value="">-- Pilih Developer --</option>
+                <option value="">-- Pilih Basis --</option>
                 @foreach ($developers as $id => $developer)   
                   <option value="{{ $id }}" @if ($mst->user_id == $id) selected                    
                   @endif>{{ $developer }}</option>
